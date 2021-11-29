@@ -1,0 +1,47 @@
+INSERT INTO `casas`.`usuario` (`user_Nombre`, `user_APaterno`, `user_AMaterno`, `user_WhatsApp`, `user_Password`, `user_Status`, `user_Role`) VALUES ('Admin', 'Admin', 'Admin', '1111111111', '$2y$10$18PzgkzAoN6BbyPMAbBkweus.L1D855HMCOgXREFlw/d3dOYZWT9m', '1', 'admin');
+INSERT INTO `casas`.`usuario` (`user_Nombre`, `user_APaterno`, `user_AMaterno`, `user_FechNac`, `user_WhatsApp`, `user_Password`, `user_Status`, `user_Role`) VALUES ('Victor', 'Diaz', 'Medina', '1999-10-21', '7774432521', '$2y$10$18PzgkzAoN6BbyPMAbBkweus.L1D855HMCOgXREFlw/d3dOYZWT9m', '1', 'user');
+INSERT INTO `casas`.`usuario` (`user_Nombre`, `user_APaterno`, `user_AMaterno`, `user_FechNac`, `user_WhatsApp`, `user_Password`, `user_Status`, `user_Role`) VALUES ('Felipe', 'Ramirez', 'Lopez', '1999-10-21', '7771700133', '$2y$10$18PzgkzAoN6BbyPMAbBkweus.L1D855HMCOgXREFlw/d3dOYZWT9m', '1', 'user');
+
+
+INSERT INTO `casas`.`casa` (`casa_Nombre`, `casa_Lati`, `casa_Long`, `casa_Region`, `idUsuario`) VALUES ('CASA VERDE', '19.4337714', '-99.1444216', 'Ciudad de México', '1001');
+INSERT INTO `casas`.`casa` (`casa_Nombre`, `casa_Descripcion`, `casa_Lati`, `casa_Long`, `casa_Region`, `idUsuario`) VALUES ('CASA LUNA', 'Casa de dos piso, con alberca en el centro de Guerrero, esta casa Luna.', '18.6336033', '-99.2569469', 'Morelos', '1002');
+
+INSERT INTO `casas`.`servicio` (`serv_Icon`, `serv_Descripcion`, `serv_Cantidad`, `idCasa`) VALUES ('📺', 'Television', '2', '2000');
+INSERT INTO `casas`.`servicio` (`serv_Icon`, `serv_Descripcion`, `serv_Cantidad`, `idCasa`) VALUES ('🛌', 'Recamras', '4', '2000');
+
+
+INSERT INTO `casas`.`clausula` (`clau_Icon`, `clau_Descripcion`, `clau_Tipo`, `idCasa`) VALUES ('🕚', 'Entrada 11:00', 'Seguridad y Salud', '2000');
+INSERT INTO `casas`.`clausula` (`clau_Icon`, `clau_Descripcion`, `clau_Tipo`, `idCasa`) VALUES ('🚫', 'Mascotas', 'Regla', '2000');
+
+
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('header', '59cc5892806910fa6f2376ebb23d904c.png', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('right2', '4f10b7f080316ecaaddc78542eda1cd5.png', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('right1', '089bb4a2ec64e16832ddd3d4c319f61a.png', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img1.jpg', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img2.jpg', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img3.jpg', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img4.jpg', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img5.jpg', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img6.jpg', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img7.jpg', '2000');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img5.jpg', '2001');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img6.jpg', '2001');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img7.jpg', '2001');
+INSERT INTO `casas`.`fotografia` (`img_Tipo`, `img_Url`, `idCasa`) VALUES ('galeria', 'img8.jpg', '2001');
+
+
+INSERT INTO `casas`.`comentario` (`comment_Fecha`, `comment_Nomb`, `comment_Email`, `comment_Text`, `idCasa`) VALUES ('noviembre del 2021', 'Victor', 'diazpixtoriin@gmail.com', 'Me encanto la estancia, súper práctica, limpia, buen precio, buena zona, no hace falta nada. Muy amables Ivón y Estefanía en sus atenciones y pendientes a las dudas.', '2000');
+INSERT INTO `casas`.`comentario` (`comment_Fecha`, `comment_Nomb`, `comment_Email`, `comment_Text`, `idCasa`) VALUES ('noviembre del 2021', 'Luis', 'dmvo180028@upemor.edu.mx', 'En general es aceptable. Les recomiendo llevar cerillos para encender la estufa y estar al pendiente de los quemadores ya que se apagan solos y puede ocurrir un accidente.', '2000');
+INSERT INTO `casas`.`comentario` (`comment_Fecha`, `comment_Nomb`, `comment_Email`, `comment_Text`, `idCasa`) VALUES ('noviembre del 2021', 'Zara', 'vdm_2120_@hotmail.com', 'Excelente lugar en una excelente ubicación, la atención por parte de Ivón fue excelente. Espero volver pronto :)', '2000');
+INSERT INTO `casas`.`comentario` (`comment_Fecha`, `comment_Nomb`, `comment_Email`, `comment_Text`, `idCasa`) VALUES ('noviembre del 2021', 'German', 'iram.gs.1989@gmail.com', 'Excelente lugar, buenísima ubicación, limpio, ordenado, el anfitrión con mucha comunicación y disponibilidad, super recomendable.', '2000');
+INSERT INTO `casas`.`comentario` (`comment_Fecha`, `comment_Nomb`, `comment_Email`, `comment_Text`, `idCasa`) VALUES ('noviembre del 2021', 'Jesus', 'comprasmercado2016@outlook.com', 'De nuevo todo súper bien!', '2000');
+
+
+INSERT INTO `casas`.`promocion` (`promo_Codigo`, `promo_Cantidad`, `idCasa`) VALUES ('CasaVerdePromo', '1002', '2005');
+
+
+INSERT INTO `casas`.`contrato` (`cont_FechAct`, `cont_NombreArren`, `cont_APaterArren`, `cont_AMaterArren`, `cont_FechEntrada`, `cont_FechSalida`, `cont_Anticipo`, `cont_MontoTotal`, `idCasa`) VALUES ('2021-11-08', 'Juan', 'Sanchez', 'Lopez', '2021-12-26', '2021-12-28', '4000', '4000', '2000');
+INSERT INTO `casas`.`contrato` (`cont_FechAct`, `cont_NombreArren`, `cont_APaterArren`, `cont_AMaterArren`, `cont_FechEntrada`, `cont_FechSalida`, `cont_Anticipo`, `cont_MontoTotal`, `idCasa`) VALUES ('2021-11-08', 'Benito', 'Romero', 'Garcia', '2021-12-19', '2021-12-22', '4000', '4000', '2000');
+INSERT INTO `casas`.`contrato` (`cont_FechAct`, `cont_NombreArren`, `cont_APaterArren`, `cont_AMaterArren`, `cont_FechEntrada`, `cont_FechSalida`, `cont_Anticipo`, `cont_MontoTotal`, `idCasa`) VALUES ('2021-11-08', 'Juan', 'Sanchez', 'Lopez', '2021-12-10', '2021-12-12', '4000', '4000', '2000');
+INSERT INTO `casas`.`contrato` (`cont_FechAct`, `cont_NombreArren`, `cont_APaterArren`, `cont_AMaterArren`, `cont_FechEntrada`, `cont_FechSalida`, `cont_Anticipo`, `cont_MontoTotal`, `idCasa`) VALUES ('2021-11-08', 'Luis', 'Diaz', 'Sanchez', '2021-12-29', '2021-12-31', '4000', '4000', '2000');
+

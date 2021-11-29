@@ -1,0 +1,115 @@
+{
+    "_comment": "OBJETOS para PERMISOS del ROL",
+    "sites": [
+        {
+            "site": "",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "inicio",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "index",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "contractPDF",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "houseaccept",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "housecontract",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "housepage",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "houses",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "waitingtime",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "login",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "register",
+            "access": "public",
+            "role": ""
+        },
+        {
+            "site": "anfitrion",
+            "access": "private",
+            "role": "user"
+        },
+        {
+            "site": "opc_settings",
+            "access": "private",
+            "role": "user"
+        },
+        {
+            "site": "opc_calendar",
+            "access": "private",
+            "role": "user"
+        },
+        {
+            "site": "opc_house",
+            "access": "private",
+            "role": "user"
+        },
+        {
+            "site": "opc_page",
+            "access": "private",
+            "role": "user"
+        },
+        {
+            "site": "user",
+            "access": "private",
+            "role": "user"
+        },
+        {
+            "site": "admin",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "admin_anfi",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "admin_report",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "admin_backup",
+            "access": "private",
+            "role": "admin"
+        }
+    ],
+    "_comment 2": "Cuando ACCESS es el incorrecto",
+    "default-sites": {
+        "user": "anfitrion",
+        "admin": "admin"
+    }
+}
