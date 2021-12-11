@@ -1,6 +1,5 @@
 <?php
 
-require_once 'models/joincasamodel.php';
 class Anfitrion extends SessionController{
 
     private $user;

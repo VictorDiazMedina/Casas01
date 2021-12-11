@@ -73,7 +73,9 @@ class CommentModel extends Model implements IModel{
                 $item = new CommentModel();
                 $item->setId($p['idComentario']);
                 $item->setCommentFecha($p['comment_Fecha']);
+                $item->setCommentNomb($p['comment_Nomb']);
                 $item->setCommentEmail($p['comment_Email']);
+                $item->setCommentText($p['comment_Text']);
                 $item->setIdCas($p['idCasa']);
                 array_push($items, $item);
             }

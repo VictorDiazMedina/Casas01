@@ -21,18 +21,28 @@ require_once 'models/commentmodel.php';
         }
         
         function getDataCommentJSON(){
-            header('Content-Type: application/json');
-            $res = [];
-            $commentModel     = new CommentModel();
-            $comments = $commentModel->getAll();
-    
-            foreach ($comments as $comment) {
-                array_push($res, $comment->toArray());
+            header("Content-type: application/json; charset=utf-8");
+            $input = json_decode(file_get_contents("php://input"), true);
+
+            if(!empty($input)){
+                $res = [];
+                $idCasa = $input['idCasa'];
+                $commentModel     = new CommentModel();
+                $comments = $commentModel->get($idCasa);
+        
+                foreach ($comments as $comment) {
+                    array_push($res, $comment->toArray());
+                }
+
+                if(empty ( $res )){
+                    echo json_encode('NULO');
+                }else {
+                    echo json_encode($res);
+                }
+                exit;
             }
             
-            
-            echo json_encode($res);
-    
+            exit;
         }
         
         function addComment(){

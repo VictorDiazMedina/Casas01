@@ -109,6 +109,25 @@ class ContractModel extends Model implements IModel{
 
 
 
+    public function getEstados(){
+        $items = [];
+        try{
+            $query = $this->query('SELECT COUNT(MONTH (cont_FechEntrada)) as cont_FechEntrada, Casa.casa_Region as idCasa FROM Contrato INNER JOIN Casa ON Contrato.idCasa = Casa.idCasa GROUP BY Contrato.idCasa');
+            while($p = $query->fetch(PDO::FETCH_ASSOC)){
+                $item = new ContractModel();
+
+                $item->setContFechEntrada($p['cont_FechEntrada']);
+                $item->setIdCas($p['idCasa']);
+
+
+                array_push($items, $item);
+            }
+            return $items;
+        }catch(PDOException $e){
+            error_log('CONTRACTMODEL::getAll-> PDOExecption '.$e);
+        }
+    }
+
     public function getMes(){
         $items = [];
         try{

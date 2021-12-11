@@ -77,7 +77,7 @@ class PhotoModel extends Model implements IModel{
     public function getImg($id){
         $items = [];
         try{
-            $query = $this->prepare('SELECT img_Url, img_Tipo FROM Fotografia WHERE img_Tipo = "header" OR img_Tipo = "right1" OR img_Tipo = "right2" AND idCasa = :id');
+            $query = $this->prepare('SELECT img_Url, img_Tipo FROM Fotografia WHERE (img_Tipo = "header" OR img_Tipo = "right1" OR img_Tipo = "right2") AND idCasa = :id');
             $query->execute(['id'=> $id]);
 
             while($p = $query->fetch(PDO::FETCH_ASSOC)){

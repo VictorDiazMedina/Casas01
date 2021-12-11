@@ -4,10 +4,13 @@
 $meses          = $this->d['meses'];
 $contratos      = $this->d['contratos'];
 $rentas         = $this->d['rentas']; 
+$estados        = $this->d['estados']; 
 $labelsTiempo   = $this->d['labelsTiempo'];
 $colorTiempo    = $this->d['colorTiempo']; 
 $labelsRentas   = $this->d['labelsRentas'];
-$colorRentas    = $this->d['colorRentas'];?>
+$colorRentas    = $this->d['colorRentas'];
+$labelsEstados  = $this->d['labelsEstados'];
+$colorEstados   = $this->d['colorEstados'];?>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.js"
@@ -65,6 +68,30 @@ $colorRentas    = $this->d['colorRentas'];?>
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+        <div class="col-md-6" style="margin-left: 290px;">
+            <div class="tile">
+                <h3 class="tile-title">Rentas por Estado</h3>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <canvas class="embed-responsive-item" id="donutChart"></canvas>
+
+                </div>
+                <div class="filter-container">
+                    <select id="scategory" class="custom-select">
+                        <option value="">Ver información en Lista</option>
+                        <?php
+                                for ($x = 0; $x < count($labelsEstados); $x++) {
+                                    echo "<option class='optionTiempo' style='background-color: ".$colorEstados[$x]."' disabled>".$labelsEstados[$x]."</option>";
+                                }
+                            ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="tile">
         <div class="tile-body">
@@ -492,8 +519,13 @@ var chart1 = new Chart(ctx, {
 
 <script type="text/javascript">
 var rentasArray = <?php echo json_encode($rentas); ?>;
+var estadosArray = <?php echo json_encode($estados); ?>;
 
 var ctxpo = document.getElementById('pieChart').getContext('2d');
 var polarChart = new Chart(ctxpo).PolarArea(rentasArray);
+
+
+var ctxd = document.getElementById('donutChart').getContext('2d');
+var doughnutChart = new Chart(ctxd).Doughnut(estadosArray);
 </script>
 <?php require 'footer_admin.php'; ?>

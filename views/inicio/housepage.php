@@ -250,13 +250,23 @@
     var data = [];
     var copydata = [];
 
+    var datos = {
+        idCasa: "<?php echo $_GET["idCasa"]; ?>"
+    };
+    var init = {
+
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    };
 
 
     async function getData() {
-        data = await fetch('http://localhost:80/Casas01/housepage/getDataCommentJSON')
+        data = await fetch('http://localhost:80/Casas01/housepage/getDataCommentJSON', init)
             .then(res => res.json())
             .then(json => json);
-        this.copydata = [...this.data];
 
         renderData(data);
     }
@@ -267,20 +277,24 @@
 
         let total = 0;
         databody.innerHTML = '';
+        if (data == 'NULO') {
+            databody.innerHTML = 'No hay comentarios aún :(';
+        } else {
 
-        data.forEach(item => {
+            data.forEach(item => {
 
-            databody.innerHTML += `<div class="gridComent">
-                    <div class="comentName"><b>${item.comment_Nomb}</b>
-                        <div class="comentFech">
-                            <div>${item.comment_Fecha}</div>
-                        </div>
+                databody.innerHTML += `<div class="gridComent">
+                <div class="comentName"><b>${item.comment_Nomb}</b>
+                    <div class="comentFech">
+                        <div>${item.comment_Fecha}</div>
                     </div>
-                    <div class="comentText">${item.comment_Text}</div>
-                </div>`;
+                </div>
+                <div class="comentText">${item.comment_Text}</div>
+            </div>`;
 
 
-        });
+            });
+        }
     }
     //MODA AGREGAR
     function addDataComment() {

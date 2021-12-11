@@ -37,6 +37,11 @@ require_once 'models/promotionmodel.php';
             $labelsRentas      = $this->getLabelsRentas($casas, $colorRentas);
             $rentas            = $this->getRentas($casas, $colorRentas);
 
+            $estados           = $this->contract->getEstados();
+            $colorEstados      = $this->getColorTiempo($estados);
+            $labelsEstados     = $this->getLabelsEstados($estados, $colorEstados);
+            $estadoss          = $this->getEstados($estados, $colorEstados);
+
 
             $anfitriones = $this->usesr->getAnfi();
             
@@ -47,7 +52,10 @@ require_once 'models/promotionmodel.php';
                 'labelsTiempo'    => $labelsTiempo,
                 'rentas'          => $rentas,
                 'labelsRentas'    => $labelsRentas,
-                'colorRentas'     => $colorRentas
+                'colorRentas'     => $colorRentas,
+                'estados'         => $estadoss,
+                'labelsEstados'   => $labelsEstados,
+                'colorEstados'    => $colorEstados
                 ]);
             
         }
@@ -143,6 +151,7 @@ require_once 'models/promotionmodel.php';
         }
 
 
+        
         function getRentas($casas, $colorRentas){
             $res = [];
             $contractModel    = new ContractModel();
@@ -166,6 +175,36 @@ require_once 'models/promotionmodel.php';
             for ($x = 0; $x < count($casas); $x++) {
                
                 $mes = "[ ".$casas[$x]->getContFechEntrada()." ] ".$casas[$x]->getIdCas(); // marzo
+                
+                array_push($res, $mes);
+            }
+            var_dump($res);
+            return $res;
+        }
+
+        function getEstados($estados, $colorEstados){
+            $res = [];
+            $contractModel    = new ContractModel();
+            
+            
+            for ($x = 0; $x < count($estados); $x++) {
+                
+                $obj = new stdClass();
+                $obj->value = $estados[$x]->getContFechEntrada();
+                $obj->color = $colorEstados[$x];
+                $obj->label = $estados[$x]->getIdCas();
+                array_push($res, $obj);
+            }
+            return $res;
+        }
+
+        function getLabelsEstados($estados, $colorEstados){
+            //$shortMes = $this->getShortMes($meses);
+            $res = [];
+            
+            for ($x = 0; $x < count($estados); $x++) {
+               
+                $mes = "[ ".$estados[$x]->getContFechEntrada()." ] ".$estados[$x]->getIdCas(); // marzo
                 
                 array_push($res, $mes);
             }

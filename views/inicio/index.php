@@ -6,44 +6,30 @@
 ?>
 <div class="slider" id="Inicio">
     <div class="slide active">
-        <img src="assets/image/anfitriones/2000/img1.jpg" alt="">
+        <img src="assets/image/administrador/promoCasaVerde.png" alt="">
         <div class="info">
-            <h2>Winter Mountains</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua.</p>
+            <h2>Promoción</h2>
+            <p>Casa verde esta de promoción, aplica el código al realizar tu contrato. Usa el código: PromoCasaVerde</p>
         </div>
     </div>
     <div class="slide">
-        <img src="assets/image/anfitriones/2000/img2.jpg" alt="">
+        <img src="assets/image/administrador/casaeco.png" alt="">
+
+    </div>
+    <div class="slide">
+        <img src="assets/image/administrador/fincamango.png" alt="">
         <div class="info">
-            <h2>Tropical Desert</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua.</p>
+            <h2>Visita Finca Mango</h2>
+            <p>Buena ubicación, casa con lujos</p>
         </div>
     </div>
     <div class="slide">
-        <img src="assets/image/anfitriones/2000/img3.jpg" alt="">
-        <div class="info">
-            <h2>Steaming Volcanoes</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua.</p>
-        </div>
+        <img src="assets/image/administrador/casamar.png" alt="">
+
     </div>
     <div class="slide">
-        <img src="assets/image/anfitriones/2000/img4.jpg" alt="">
-        <div class="info">
-            <h2>Mountain River</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua.</p>
-        </div>
-    </div>
-    <div class="slide">
-        <img src="assets/image/anfitriones/2000/img5.jpg" alt="">
-        <div class="info">
-            <h2>Egypt Pyramids</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua.</p>
-        </div>
+        <img src="assets/image/administrador/casaluna.png" alt="">
+
     </div>
     <div class="navigation">
         <i class="fas fa-chevron-left prev-btn"></i>
