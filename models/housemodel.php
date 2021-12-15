@@ -134,6 +134,7 @@ class HouseModel extends Model implements IModel{
             $this->casaLati= $array['casa_Lati'];
             $this->casaLong= $array['casa_Long'];
             $this->casaRegion= $array['casa_Region'];
+            $this->casaLogo= $array['casa_Logo'];
             $this->casaRenta= $array['casa_Renta'];
             $this->casaDeposito= $array['casa_Deposito'];
             $this->idUsuario= $array['idUsuario'];

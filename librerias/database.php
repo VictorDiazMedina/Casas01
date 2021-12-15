@@ -12,11 +12,11 @@ class Database{
 
 
     public function __construct(){
-        $this->host = constant('HOST');
-        $this->db = constant('DB');
-        $this->user = constant('USER');
+        $this->host     = constant('HOST');
+        $this->db       = constant('DB');
+        $this->user     = constant('USER');
         $this->password = constant('PASSWORD');
-        $this->charset = constant('CHARSET');
+        $this->charset  = constant('CHARSET');
 
         
     }

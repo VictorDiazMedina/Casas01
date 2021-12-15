@@ -1,5 +1,6 @@
 <?php
 
+//Estructura de metodos base
 interface IModel{
     public function save();
     public function getAll();
@@ -7,6 +8,5 @@ interface IModel{
     public function delete($id);
     public function update();
     public function from($array);
-
 }
 ?>

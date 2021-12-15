@@ -168,7 +168,7 @@ class UserModel extends Model implements IModel{
         }
     }
 
-    
+    //Obtener informacion de Usuario con respecto a su Casa
     public function getAnfiInicio(){
         $items = [];
         try{
@@ -201,6 +201,7 @@ class UserModel extends Model implements IModel{
         }
     }
 
+    //Obtener informacion de Usuario con respecto a su Casa
     public function getAnfi(){
         $items = [];
         try{
@@ -233,7 +234,7 @@ class UserModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener toda informacion de un Usuario en especifico
     public function getUser($id){
         $items = [];
         try{
@@ -250,6 +251,7 @@ class UserModel extends Model implements IModel{
         }
     }
 
+    //Obtener toda informacion de un Usuario en especifico
     public function getU($id){
         $items = [];
         try{
@@ -271,7 +273,7 @@ class UserModel extends Model implements IModel{
     }
 
 
-
+    //Obtener toda informacion dentro de un arreglo
     public function toArray(){
         $array = [];      
 
@@ -291,7 +293,7 @@ class UserModel extends Model implements IModel{
     }
 
 
-    
+    //Actualizacion de Status de un Usuario
     public function updateStatus(){
         try{
             $query = $this->prepare('UPDATE Usuario SET user_Status = :userStatus WHERE idUsuario = :id');
@@ -309,6 +311,7 @@ class UserModel extends Model implements IModel{
     }
 
 
+    //Actualizacion de foto de perfil 
     function updatePhoto($userPerfil, $id){
         try{
             $query = $this->db->connect()->prepare('UPDATE Usuario SET user_Perfil = :userPerfil WHERE idUsuario = :id');
@@ -325,7 +328,7 @@ class UserModel extends Model implements IModel{
         }
     }
 
-
+    //Asignacion de datos de un arreglo
     public function from($array){
 
         $this->id = $array['idUsuario'];
@@ -343,7 +346,7 @@ class UserModel extends Model implements IModel{
     }
 
 
-    
+    //Obtener id delñ usuario con respecto al numero de WhatsApp
     public function idWhats($userWhats){
         $idU;
         try{
@@ -362,6 +365,7 @@ class UserModel extends Model implements IModel{
     }
 
 
+    //Comparar Contraseñas durante el Login
     public function comparePassword($userPass, $id){
         try{
 
@@ -375,12 +379,13 @@ class UserModel extends Model implements IModel{
     }
 
 
+    //Obtener contraseña encriptado
     private function getHashedPassword($userPass){
         return password_hash($userPass, PASSWORD_DEFAULT, ['cost' => 10]);
     }
 
 
-
+    //SETTER
     public function setId($id){$this->id=$id;}
     public function setUserNomb($userNomb){$this->userNomb=$userNomb;}
     public function setUserAp($userAp){$this->userAp=$userAp;}
@@ -391,8 +396,6 @@ class UserModel extends Model implements IModel{
     public function setUserWhats($userWhats){$this->userWhats=$userWhats;}
     public function setUserStatus($userStatus){$this->userStatus=$userStatus;}
     public function setRole($role){$this->role=$role;}
-    
-
     public function setUserPassword($userPass, $hash = true){ 
         if($hash){
             $this->userPass = $this->getHashedPassword($userPass);
@@ -401,7 +404,7 @@ class UserModel extends Model implements IModel{
         }
     }
 
-    
+    //GETTER
     public function getRole(){return $this->role;}
     public function getUserStatus(){return $this->userStatus;}
     public function getUserPass(){return $this->userPass;}

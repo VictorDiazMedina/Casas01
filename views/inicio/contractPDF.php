@@ -133,7 +133,7 @@ $pdf = new FPDF('P','mm','Letter');
 $pdf->AddPage();
 $pdf->SetLeftMargin(10.5);
 $pdf->SetFont('Arial','',12);
-$pdf->Image('assets/image/Casa.jpg',15,5,48.82,32.9);
+$pdf->Image('assets/image/anfitriones/'.$casa->getId().'/'.$casa->getCasaLogo().'',15,5,48.82,32.9);
 $pdf->SetFont('Arial','B',12);
 $pdf->Ln(4);
 $pdf->Cell(0,5,'CONTRATO DE ARRENDAMIENTO '.strtoupper($casa->getCasaNombre()).'',0,1,'R');

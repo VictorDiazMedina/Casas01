@@ -5,10 +5,11 @@ class SuccessMessages{
     //Controller
     //method
     //operation
+    
     const SUCCESS_ADMIN_NEWCATEGORY  = "f52228665c4f14c8695b194f670b0ef1";
     
-    const SUCCESS_ADMIN_BACKUP  = "a7sdhsnds7hdandnbadmsdnuhndhu7sd";
-    const SUCCESS_ADMIN_RESTORE  = "audshd7shdnasdyg6ygad6ts8s6dsg";
+    const SUCCESS_ADMIN_BACKUP       = "a7sdhsnds7hdandnbadmsdnuhndhu7sd";
+    const SUCCESS_ADMIN_RESTORE      = "audshd7shdnasdyg6ygad6ts8s6dsg";
 
     const SUCCESS_REGISTRO_SUCCESS   = "9a878dfbuyy678ai9898ytabufy60ef1";    
     const SUCCESS_CONTRATO_SUCCESS   = "ajaisniisndisiakmmubnanjsnujnad1";
@@ -24,15 +25,15 @@ class SuccessMessages{
         $this->successList = [
             SuccessMessages::SUCCESS_ADMIN_NEWCATEGORY => "Nueva categoría creada correctamente",
 
-            SuccessMessages::SUCCESS_ADMIN_BACKUP => "Copia de seguridad realizada con éxito",
-            SuccessMessages::SUCCESS_ADMIN_RESTORE => "Se restauró correctamente la copia de seguridad",
+            SuccessMessages::SUCCESS_ADMIN_BACKUP      => "Copia de seguridad realizada con éxito",
+            SuccessMessages::SUCCESS_ADMIN_RESTORE     => "Se restauró correctamente la copia de seguridad",
 
-            SuccessMessages::SUCCESS_REGISTRO_SUCCESS => "Registro Exitoso",
-            SuccessMessages::SUCCESS_CONTRATO_SUCCESS => "Registro Exitoso",
-            SuccessMessages::SUCCESS_USER_UPDATEPHOTO => "Imagen de anfitrion actualizada correctamente",
+            SuccessMessages::SUCCESS_REGISTRO_SUCCESS  => "Registro Exitoso",
+            SuccessMessages::SUCCESS_CONTRATO_SUCCESS  => "Registro Exitoso",
+            SuccessMessages::SUCCESS_USER_UPDATEPHOTO  => "Imagen de anfitrion actualizada correctamente",
 
-            SuccessMessages::SUCCESS_DELETE => "Eliminación Exitoso",            
-            SuccessMessages::SUCCESS_UPDATE => "Actualización Exitoso"
+            SuccessMessages::SUCCESS_DELETE            => "Eliminación Exitoso",            
+            SuccessMessages::SUCCESS_UPDATE            => "Actualización Exitoso"
         ];
     }
 
