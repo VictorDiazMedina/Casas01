@@ -9,13 +9,13 @@ class Opc_settings extends SessionController{
         parent::__construct();
 
         $this->user = $this->getUserSessionData();
-        error_log("Anfitrion::constructor() " . $this->user->getUserWhats());
+        error_log("OPC_SETTINGS:: construct() " . $this->user->getUserWhats());
         
     }
 
-
-     function render(){
-        error_log("Anfitrion::RENDER() ");
+    //Muestra la Vista con datos del Usuario logeado
+    function render(){
+        error_log("OPC_SETTINGS:: render()");
 
         $this->view->render('anfitrion/opc_settings', [
             'user'                => $this->user
@@ -23,7 +23,7 @@ class Opc_settings extends SessionController{
         ]);
     }
     
-    
+    //Actualiza infromacion del usuario Anfitrion
     function updateUser(){
         if($this->existPOST(['userNomb', 'userAp', 'userAm', 'userFechNac'])){
             
@@ -31,11 +31,11 @@ class Opc_settings extends SessionController{
             $userAp   = $this->getPost('userAp');
             $userAm   = $this->getPost('userAm');
             $userFechNac   = $this->getPost('userFechNac');
-            error_log("Anfitrion::updateUser() " . $userFechNac);
+            error_log("OPC_SETTINGS:: updateUser() " . $userFechNac);
             //validate data
             if($userNomb == '' || empty($userNomb) || $userAp == '' || empty($userAp) || $userAm == '' || empty($userAm) || $userFechNac == '' || empty($userFechNac)){
                 // error al validar datos
-                //$this->errorAtSignup('Campos vacios');
+                
                 $this->redirect('opc_settings', ['error'=> ErrorMessages::ERROR_REGISTRO_VACIO]);
                 return;
             }
@@ -49,11 +49,9 @@ class Opc_settings extends SessionController{
                 $this->user->setUserFechNac($userFechNac);
     
                 if($this->user->update()){
-                    //$this->view->render('login/index');
+                    
                     $this->redirect('opc_settings',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
                 }else{
-                    /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                    return; */
                     $this->redirect('opc_settings',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
                 }
             }
@@ -61,13 +59,12 @@ class Opc_settings extends SessionController{
         
             
         }else{
-            // error, cargar vista con errores
-            //$this->errorAtSignup('Ingresa nombre de usuario y userAp');
             $this->redirect('opc_settings',['error'=> ErrorMessages::ERROR_REGISTRO_EXISTE]);
         }
     }
 
 
+    //Devuelve la edad dando una fecha de nacimiento
     function calculaedad($fechanacimiento){
         list($ano,$mes,$dia) = explode("-",$fechanacimiento);
         $ano_diferencia  = date("Y") - $ano;
@@ -76,16 +73,16 @@ class Opc_settings extends SessionController{
         if ($dia_diferencia < 0 || $mes_diferencia < 0)
           $ano_diferencia--;
         return $ano_diferencia;
-      }
+    }
       
-    
+    //Actualiza fotografia del usuario anfitrion
     function updateImg(){
         if(!isset($_FILES['photo'])){
             $this->redirect('opc_settings', ['error' => ErrorMessages::ERROR_USER_UPDATEPHOTO]);
             return;
         }
         $photo = $_FILES['photo'];
-        error_log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPP" .  $photo);
+        
         $target_dir = "assets/image/anfitriones/";
         $extarr = explode('.',$photo["name"]);
         $filename = $extarr[sizeof($extarr)-2];
@@ -94,21 +91,20 @@ class Opc_settings extends SessionController{
         $target_file = $target_dir . $hash;
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        error_log("Anfitrion::updateImg(): " .  $filename);
-        error_log("Anfitrion::updateImg(): " .  $hash);
+       
         $check = getimagesize($photo["tmp_name"]);
         if($check !== false) {
-            //echo "File is an image - " . $check["mime"] . ".";
+            //Es una imagen
             $uploadOk = 1;
         } else {
-            //echo "File is not an image.";
+            //No es imagen
             $uploadOk = 0;
         }
 
         if ($uploadOk == 0) {
-            //echo "Sorry, your file was not uploaded.";
+            
             $this->redirect('opc_settings', ['error' => ErrorMessages::ERROR_USER_UPDATEPHOTO_FORMAT]);
-        // if everything is ok, try to upload file
+     
         } else {
             if (move_uploaded_file($photo["tmp_name"], $target_file)) {
                 $this->user->updatePhoto($hash, $this->user->getId());
@@ -120,40 +116,6 @@ class Opc_settings extends SessionController{
         }
         
     
-        /*$photo =  $_FILES['photo'];
-        
-        $extarr = explode('.',$photo["name"]);
-        $filename = $extarr[sizeof($extarr)-2];
-
-        $directorio = "assets/image/anfitriones/";
-        $archivo = $directorio . basename($_FILES["photo"]["name"]);
-        error_log("Anfitrion::updateImg(): " .  $filename);
-        
-        $tipoArchivo = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
-        //VALIDA QUE ES UNA IAMGEN
-        $CheckImgSize = getimagesize($_FILES["photo"]["tmp_name"]);
-        
-        if($CheckImgSize != false){
-            //VALIDA EL TAMAÑO
-            $size = $_FILES["photo"]["size"];
-            if($size > 500000){
-                //ERROR, IMAGEN DEBE SER MENOR A 500KB
-            }else{
-                //VALIDA EL TIPO
-                if($tipoArchivo == "jpg" || $tipoArchivo == "jpeg"){
-                   
-                    if(move_uploaded_file($_FILES["photo"]["tmp_name"], $archivo)){
-                        //SUCCES, IMAGEN ACTUALIZADA
-                    }else{
-                        //ERROR, AL SUBIR IMAGEN
-                    }
-                }else{
-                    //ERROR, SOLO SE ACEPTA JPG/JPEG
-                }
-            }
-        }else{
-            //ERROR, NO ES IMAGEN
-        }*/
     }
 
 

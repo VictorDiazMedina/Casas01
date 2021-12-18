@@ -18,7 +18,9 @@ class ClauseModel extends Model implements IModel{
     }
 
 
-    //Funciones 
+    //Funciones de MODELO CLAUSULAS
+    
+    //Funcion para guardar
     public function save(){
         try{
             $query = $this->prepare('INSERT INTO Clausula(clau_Icon, clau_Tipo, clau_Descripcion, idCasa) VALUES(:clauIcon, :clauTipo, :clauDescrip, :idCas)');
@@ -35,7 +37,7 @@ class ClauseModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener todos los datos de Clausula
     public function getAll(){
         $items = [];
         try{
@@ -58,7 +60,7 @@ class ClauseModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener una clausula de su respectiva casa
     public function get($id){
         $items = [];
         try{
@@ -78,6 +80,7 @@ class ClauseModel extends Model implements IModel{
         }
     }
 
+    //Obtener una clausula especifica
     public function getClause($id){
         $items = [];
         try{
@@ -94,7 +97,7 @@ class ClauseModel extends Model implements IModel{
         }
     }
 
-
+    //Eliminar una clausula
     public function delete($id){
         try{
             $query = $this->prepare('DELETE FROM Clausula WHERE idClausula = :id');
@@ -107,7 +110,7 @@ class ClauseModel extends Model implements IModel{
         }
     }
 
-
+    //Actualizar una clausula
     public function update(){
         try{
             $query = $this->prepare('UPDATE Clausula SET clau_Icon = :clauIcon, clau_Tipo = :clauTipo, clau_Descripcion = :clauDescrip WHERE idClausula = :id');
@@ -126,10 +129,6 @@ class ClauseModel extends Model implements IModel{
         }
     }
 
-
- 
-
-
     public function from($array){
 
         $this->id = $array['idClausula'];
@@ -140,6 +139,7 @@ class ClauseModel extends Model implements IModel{
 
     }
 
+    //Obtener toda informacion dentro de un arreglo
     public function toArray(){
         $array = [];      
         $array['idClausula'] = $this->id;

@@ -125,8 +125,8 @@ $colorEstados   = $this->d['colorEstados'];?>
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                                <input class="form-control" name="promo_Cantidad" id="promo_Cantidad" type="text"
-                                    placeholder="MX">
+                                <input class="form-control" onkeypress="return numbers(event);" name="promo_Cantidad"
+                                    id="promo_Cantidad" type="text" placeholder="MX">
                                 <div class="input-group-append"><span class="input-group-text">.00</span></div>
                             </div>
                         </div>
@@ -318,7 +318,7 @@ function renderData(data) {
                         '         </div>' +
                         '         <div>' +
                         '           <label class="textModal">Cantidad</label>' +
-                        '           <input class="form-control" type="text" name="promoCantidad" id="promoCantidad" placeholder="Apellido Paterno" required="" value="' +
+                        '           <input class="form-control" onkeypress="return numbers(event);" type="text" name="promoCantidad" id="promoCantidad" placeholder="Apellido Paterno" required="" value="' +
                         info.promo_Cantidad + '">' +
                         '         </div>' +
                         '       </div>' +
@@ -528,4 +528,15 @@ var polarChart = new Chart(ctxpo).PolarArea(rentasArray);
 var ctxd = document.getElementById('donutChart').getContext('2d');
 var doughnutChart = new Chart(ctxd).Doughnut(estadosArray);
 </script>
+
+<script>
+function numbers(e) {
+    var keynum = window.event ? window.event.keyCode : e.which;
+    if ((keynum == 8) || (keynum == 46))
+        return true;
+
+    return /\d/.test(String.fromCharCode(keynum));
+}
+</script>
+
 <?php require 'footer_admin.php'; ?>

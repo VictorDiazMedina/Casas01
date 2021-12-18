@@ -14,15 +14,15 @@ class Opc_house extends SessionController{
         $this->user = $this->getUserSessionData();
         $this->house = $this->getHouseSessionData();
         
-        error_log("Anfitrion::constructor() " . $this->user->getUserWhats());
+        error_log("OPC_HOUSE:: construct() " . $this->user->getUserWhats());
         
-        error_log("Anfitrion::constructor() " .  $this->house->getIdUsuario());
         
     }
 
 
+    //Muestra la VIsta, enviando datos del usuario anfitrion y su casa correspondiente
      function render(){
-        error_log("Anfitrion::RENDER() ");
+        error_log("OPC_HOUSE:: render()");
 
         $this->view->render('anfitrion/opc_house', [
             'user'                => $this->user,
@@ -31,6 +31,7 @@ class Opc_house extends SessionController{
         ]);
     }
     
+    //Funcion de GEOPLUGIN
     function fetch($host) {
 
 		if ( function_exists('curl_init') ) {
@@ -58,6 +59,7 @@ class Opc_house extends SessionController{
 		return $response;
 	}
     
+    //Funcion de GEOPLUGIN
     function nearby($radius=10, $limit=1, $latitude, $longitude) {
 
 		if ( !is_numeric($latitude) || !is_numeric($longitude) ) {
@@ -74,6 +76,7 @@ class Opc_house extends SessionController{
 
 	}
     
+    //Actualiza informacion de una Casa
     function updateHouse(){
         if($this->existPOST(['casaNombre', 'casaRenta', 'casaDeposito', 'casaLati', 'casaLong'])){
             
@@ -85,7 +88,6 @@ class Opc_house extends SessionController{
             $region = "";
             error_log("Anfitrion::updateHouse() " . $casaNombre );
             //validate data
-            
 
             $this->house->setCasaNombre($casaNombre);
             $this->house->setCasaRenta($casaRenta);
@@ -105,16 +107,11 @@ class Opc_house extends SessionController{
             }
 
 
-            error_log("REGION REGION" . $region );
-
             $this->house->setCasaRegion($region);
 
             if($this->house->update()){
-                //$this->view->render('login/index');
                 $this->redirect('opc_house',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
             }else{
-                /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                return; */
                 $this->redirect('opc_house',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
             }
 
@@ -122,14 +119,12 @@ class Opc_house extends SessionController{
 
         }else{
             // error, cargar vista con errores
-            //$this->errorAtSignup('Ingresa nombre de usuario y casaLati');
             $this->redirect('opc_house',['error'=> ErrorMessages::ERROR_REGISTRO_EXISTE]);
         }
     }
 
-
+    //Guarda una fotografia en Galeria
     function saveGallery(){
-        //print_r($_POST); exit;
                 
             $folderPath = './assets/image/anfitriones/'.$this->house->getId().'/';
             error_log("URL: ".$folderPath);
@@ -161,12 +156,11 @@ class Opc_house extends SessionController{
             $this->house->updateLogo($hash,$this->house->getId());  
                 
             file_put_contents($urlPhoto, $image_base64);
-            echo json_encode(["image uploaded successfully."]);  
-                
+            echo json_encode(["image uploaded successfully."]);   
             
-            
-        }
-
+    }
+ 
+    //Actualiza la fotografia de perfil del usuario anfitrion
     function updateImg(){
         if(!isset($_FILES['photo'])){
             $this->redirect('opc_house', ['error' => ErrorMessages::ERROR_USER_UPDATEPHOTO]);
@@ -186,17 +180,17 @@ class Opc_house extends SessionController{
         error_log("Anfitrion::updateImg(): " . $hash);
         $check = getimagesize($photo["tmp_name"]);
         if($check !== false) {
-            //echo "File is an image - " . $check["mime"] . ".";
+            
             $uploadOk = 1;
         } else {
-            //echo "File is not an image.";
+            
             $uploadOk = 0;
         }
 
         if ($uploadOk == 0) {
-            //echo "Sorry, your file was not uploaded.";
+            // Si todo está bien, intenta cargar el archivo
             $this->redirect('opc_house', ['error' => ErrorMessages::ERROR_USER_UPDATEPHOTO_FORMAT]);
-            // if everything is ok, try to upload file
+            
         } else {
             if (move_uploaded_file($photo["tmp_name"], $target_file)) {
                 $this->user->updatePhoto($hash, $this->user->getId());
@@ -207,41 +201,6 @@ class Opc_house extends SessionController{
             }
         }
 
-
-            /*$photo = $_FILES['photo'];
-
-            $extarr = explode('.',$photo["name"]);
-            $filename = $extarr[sizeof($extarr)-2];
-
-            $directorio = "assets/image/anfitriones/";
-            $archivo = $directorio . basename($_FILES["photo"]["name"]);
-            error_log("Anfitrion::updateImg(): " . $filename);
-
-            $tipoArchivo = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
-            //VALIDA QUE ES UNA IAMGEN
-            $CheckImgSize = getimagesize($_FILES["photo"]["tmp_name"]);
-
-            if($CheckImgSize != false){
-            //VALIDA EL TAMAÑO
-            $size = $_FILES["photo"]["size"];
-            if($size > 500000){
-            //ERROR, IMAGEN DEBE SER MENOR A 500KB
-            }else{
-            //VALIDA EL TIPO
-            if($tipoArchivo == "jpg" || $tipoArchivo == "jpeg"){
-
-            if(move_uploaded_file($_FILES["photo"]["tmp_name"], $archivo)){
-            //SUCCES, IMAGEN ACTUALIZADA
-            }else{
-            //ERROR, AL SUBIR IMAGEN
-            }
-            }else{
-            //ERROR, SOLO SE ACEPTA JPG/JPEG
-            }
-            }
-            }else{
-            //ERROR, NO ES IMAGEN
-            }*/
     }
 
 

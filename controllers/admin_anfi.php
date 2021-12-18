@@ -13,6 +13,7 @@ require_once 'models/usermodel.php';
             error_log('ADMIN::construct-> ADMIN_ANFI');
         }
 
+        //Mostrar Vista
         function render(){
             error_log('ADMIN::render -> Carga el Index de ADMIN');
             
@@ -31,6 +32,7 @@ require_once 'models/usermodel.php';
             
         }
 
+        //Obtener datos de Anfitrion y mandarlo en formato JSON
         function getHistoryJSON(){
             header('Content-Type: application/json');
             $res = [];
@@ -46,10 +48,11 @@ require_once 'models/usermodel.php';
     
         }
 
+        //Obtener datos de Usuario y mandarlo en formato JSON
         function getUser(){
         
-            error_log("opcCALENDAR: GETUser");
-            //print_r($_POST); exit;
+            error_log("ADMIN_ANFI::getUser-> Inicio");
+            
             if(!empty($_POST)){
                 //extraer datos
                 if($_POST['action'] == 'infoUser'){
@@ -58,13 +61,11 @@ require_once 'models/usermodel.php';
     
                     $res = [];
                     
-                    error_log("id: ". $id);
                     $userModel     = new UserModel();
                     $user          = $userModel->getUser($id);
                     
                     
                     echo json_encode($user, JSON_UNESCAPED_UNICODE);
-                    error_log("CONSULTAR PRODUCTO ");
                     exit;
                 }
                 echo 'error';
@@ -72,16 +73,17 @@ require_once 'models/usermodel.php';
             exit;
         }
 
+        //Actualizar el estatus de usuariio anfitrion por parte del Administrador
         function updateStatus(){
         
-            error_log("opcCALENDAR: UPDATESTATUS");
-            //print_r($_POST); exit;
+            error_log("ADMIN_ANFI::updateStatus-> Inicio");
+            
             if(!empty($_POST)){
                 if($_POST['action'] == 'updateStatus'){
                     
-                    error_log("STATUS");
+                    
                     $userStatus   = $_POST['options'];
-                    $id                = $_POST['idUsuario'];
+                    $id           = $_POST['idUsuario'];
                         
                     $userModel     = new UserModel();
 
@@ -90,16 +92,12 @@ require_once 'models/usermodel.php';
                     $userModel->setId($id);
 
                     if($userModel->updateStatus()){
-                        //$this->view->render('login/index');
-                        //$this->redirect('opc_calendar',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
-                        
+      
                         echo json_encode('ok', JSON_UNESCAPED_UNICODE);
                         
                         exit;
                     }else{
-                        /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                        return; */
-                        // $this->redirect('opc_calendar',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
+                        
                     }
                             
                        
@@ -110,28 +108,23 @@ require_once 'models/usermodel.php';
             
         }
 
+        //Elimina al usuario anfitrion por parte del Administrador
         function deleteStatus(){
-            error_log("ADMIN_ANFI: DELETEuser");
-            //print_r($_POST); exit;
+            error_log("ADMIN_ANFI::deleteStatus-> Inicio");
             if(!empty($_POST)){
                 if($_POST['action'] == 'delStatus'){
                     if(!empty($_POST['idUsuario']) ){
-                        $id                = $_POST['idUsuario'];
+                        $id            = $_POST['idUsuario'];
                         $userModel     = new userModel();
     
                         if($userModel->delete($id)){
-                            //$this->view->render('login/index');
-                            //$this->redirect('opc_calendar',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
                             echo 'ok';
                             exit;
                         }else{
-                            /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                            return; */
-                            //$this->redirect('opc_calendar',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
                             echo 'error';
                         }
                     }else{
-                        //$this->redirect('opc_calendar', ['error'=> ErrorMessages::ERROR_REGISTRO_VACIO]);
+                        
                         echo 'error';
                     }
                     exit;

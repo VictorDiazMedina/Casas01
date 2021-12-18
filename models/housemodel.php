@@ -29,7 +29,9 @@ class HouseModel extends Model implements IModel{
     }
 
 
-    //Funciones 
+    //Funciones de MODELO CASAS
+
+    //Funcion para guardar
     public function save(){
         try{
             $query = $this->prepare('
@@ -46,8 +48,8 @@ class HouseModel extends Model implements IModel{
             return false;
         }
     }
-
-    //Funciones 
+ 
+    //Crea una nueva casa con respecto al Usuario
     public function newHouse($idUser){
         try{
             $query = $this->prepare('
@@ -67,9 +69,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
- 
-
-
+    //Obtener todas la casas
     public function getAll(){
         $items = [];
         try{
@@ -97,7 +97,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener un casa especifica
     public function get($id){
         try{
             $query = $this->prepare('SELECT * FROM Casa WHERE idCasa = :id');
@@ -122,6 +122,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
+    //Obtener un casa especifica
     public function getH($id){
         try{
             $query = $this->prepare('SELECT * FROM Casa WHERE idCasa = :id');
@@ -145,6 +146,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
+    //Obtener una casa con respecto al Usuario
     public function getIdHouse($id){
         try{
             $query = $this->prepare('SELECT idCasa FROM Casa WHERE idUsuario = :id');
@@ -159,7 +161,23 @@ class HouseModel extends Model implements IModel{
         }
     }
 
+    //Obtener una casa con respecto al id de Casa
+    public function getIdCasa($id){
+        
+        try{
+            $query = $this->prepare('SELECT idCasa FROM Casa WHERE idCasa = :id');
+            $query->execute(['id'=> $id]);
+            
+            $house = $query->fetch(PDO::FETCH_ASSOC);
+            
 
+            return $house['idCasa'];
+        }catch(PDOException $e){
+            error_log('CASAMODEL::GetId-> PDOExecption '.$e);
+        }
+    }
+    
+    //Obtener una casa con respecto al Usuario
     public function getIdUser($id){
         try{
             $query = $this->prepare('SELECT * FROM Casa WHERE idUsuario = :id');
@@ -184,7 +202,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
-
+    //Eliminar una casa
     public function delete($id){
         try{
             $query = $this->prepare('DELETE FROM Casa WHERE idCasa = :id');
@@ -197,7 +215,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
-
+    //Actualizar un casa
     public function update(){
         try{
             $query = $this->prepare('UPDATE Casa SET casa_Nombre = :casaNombre, casa_Renta = :casaRenta, casa_Deposito = :casaDeposito, casa_Lati = :casaLati, casa_Long = :casaLong,  casa_Region = :casaRegion WHERE idCasa = :id');
@@ -219,6 +237,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
+    //Actualizar descripcion de una casa
     public function updateDescrip(){
         try{
             $query = $this->prepare('UPDATE Casa SET casa_Descripcion = :casaDescrip WHERE idCasa = :id');
@@ -234,7 +253,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
-
+    //Consulta las casas que no se encuentran al especificar
     public function busqCasas($noCasas){
         $place_holders = implode(',', array_fill(0, count($noCasas), '?'));
         $items = [];
@@ -255,6 +274,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
+    //Conuslta casas por Region
     public function busqCasasRegion($regionCasa){
         $items = [];
         try{
@@ -274,8 +294,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
-    
-
+    //Obtener todas la casas
     public function getCasas(){
 
 
@@ -296,7 +315,7 @@ class HouseModel extends Model implements IModel{
         }
     }
 
-
+    //Actualizar logo de una casa
     function updateLogo($casaLogo, $id){
         try{
             $query = $this->db->connect()->prepare('UPDATE Casa SET casa_Logo = :casaLogo WHERE idCasa = :id');
@@ -313,9 +332,7 @@ class HouseModel extends Model implements IModel{
         }
     }
        
-
-//INNER JOINS
-
+    //Busqueda de casas por datos especificos
     public function busqRapid($ubi, $lleg, $sali){
         $ubi2 = $ubi;
         $lleg2 = $lleg;

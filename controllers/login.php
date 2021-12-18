@@ -8,6 +8,7 @@ require_once 'models/housemodel.php';
             error_log('LOGIN::construct-> Inicio de Login');
         }
 
+        //Muestra Vista
         function render(){
             error_log('LOGIN::render -> Carga el Index de Login');
             $actual_link = trim("$_SERVER[REQUEST_URI]");
@@ -16,6 +17,7 @@ require_once 'models/housemodel.php';
             $this->view->render('login/index');
         }
 
+        //Verificacion de Inicio de Sesion, comprobando tambien el estatus del Usuario anfitrion
         function authenticate(){
             if($this->existPOST(['userWhats', 'userPass'])){
                 $userWhats = $this->getPOST('userWhats');
@@ -23,7 +25,6 @@ require_once 'models/housemodel.php';
 
                 if($userWhats == '' || empty($userWhats) || $userPass == '' || empty($userPass)){
                     // error al validar datos
-                    //$this->errorAtSignup('Campos vacios');
                     $this->redirect('login', ['error'=> ErrorMessages::ERROR_LOGIN_AUTHEN_VACIO]);
                     return;
                 }

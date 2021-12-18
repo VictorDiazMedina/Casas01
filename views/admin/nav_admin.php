@@ -2,11 +2,12 @@
  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
  <aside class="app-sidebar">
 
-     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="assets/images/admin.png"
-             alt="User Image">
+     <div class="app-sidebar__user" style="align-items: center;">
+         <!-- <img class="app-sidebar__user-avatar" src="assets/image/anfitriones/13ea48ae8495d0ee92d1a8d5957c5704.png"
+         alt="User Image">-->
          <div>
-             <p class="app-sidebar__user-name">Victor Diaz </p>
-             <p class="app-sidebar__user-designation">Administrador</p>
+             <p class="app-sidebar__user-name">Administrador </p>
+             <p class="app-sidebar__user-designation">Buen día!</p>
          </div>
      </div>
 

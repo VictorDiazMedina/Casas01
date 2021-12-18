@@ -10,31 +10,27 @@ require_once 'models/promotionmodel.php';
     class Housecontract extends SessionController{
         function __construct(){
             parent::__construct();
-            error_log('INICIO::construct-> Inicio Principal');
+            error_log('HOUSECONTRACT::construct');
         }
 
         function render(){
-            error_log('INICIO::render -> Carga el Index de Inicio');
+            error_log('HOUSECONTRACT::render');
             
             $this->view->render('inicio/housecontract',[
             ]);
         }
 
-        
+        //Obtener datos de contratos
         function dataFechas(){
             
-            error_log("HOUSECONTRACT: DATAHOUSE()");
+            error_log("HOUSECONTRACT: dataFechas()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
                 //extraer datos
-                    error_log("EXTRAER DATOS");
                     $idCasa = $input['idCasa'];
     
-                    
-                    
                     $contractModel     = new ContractModel();
                     $res      = $contractModel->getFechasBlock2($idCasa);
                     
@@ -47,27 +43,25 @@ require_once 'models/promotionmodel.php';
 
         }
 
-
+        //Aplicar promocion a un contrato
         function applyPromocion(){
         
-            error_log("HOUSECONTRACT: applyPromocion");
-            //print_r($_POST); exit;
+            error_log("HOUSECONTRACT: applyPromocion()");
+            
             if(!empty($_POST)){
                 if($_POST['action'] == 'updatePromo'){
                     if(!empty($_POST['promoCodigo']) || !empty($_POST['idPromocion'])  ){
     
                         
                         error_log("FECHA CORRECTA");
-                        $promoCodigo   = $_POST['promoCodigo'];
+                        $promoCodigo       = $_POST['promoCodigo'];
                         $id                = $_POST['idPromocion'];
                             
-                        $promotionModel     = new PromotionModel();
+                        $promotionModel    = new PromotionModel();
 
 
 
                         if($promotionModel->exists($promoCodigo, $id)){
-                            //$this->view->render('login/index');
-                            //$this->redirect('opc_calendar',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
                             $promotionModels     = new PromotionModel();
 
 
@@ -77,9 +71,6 @@ require_once 'models/promotionmodel.php';
                             
                             exit;
                         }else{
-                            /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                            return; */
-                            // $this->redirect('opc_calendar',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
                             echo json_encode('error', JSON_UNESCAPED_UNICODE);
                             
                             exit;
@@ -87,7 +78,6 @@ require_once 'models/promotionmodel.php';
                             
                         
                     }else{
-                        //$this->redirect('opc_calendar', ['error'=> ErrorMessages::ERROR_REGISTRO_VACIO]);
                         echo 'error';
                     }
                     exit;
@@ -97,16 +87,15 @@ require_once 'models/promotionmodel.php';
             
         }
 
+        //Verificar si hay promocion de una casa
         function getPromoJSON(){
             
-            error_log("HOUSECONTRACT: DATAHOUSE()");
+            error_log("HOUSECONTRACT: getPromoJSON()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
                 //extraer datos
-                    error_log("EXTRAER DATOS");
                     $idCasa = $input['idCasa'];
     
                     
@@ -126,16 +115,15 @@ require_once 'models/promotionmodel.php';
 
         }
         
+        //Obtener datos de una casa
         function dataHouse(){
             
-            error_log("HOUSECONTRACT: DATAHOUSE()");
+            error_log("HOUSECONTRACT: dataHouse()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
                 //extraer datos
-                    error_log("EXTRAER DATOS");
                     $idCasa = $input['idCasa'];
     
                     
@@ -156,30 +144,32 @@ require_once 'models/promotionmodel.php';
 
         }
 
+        //Captura de datos para realizar un nuevo contrato
         function newContract(){
+            
             if($this->existPOST(['userNomb', 'userAp', 'userAm'])){
                 
                 $userNomb = $this->getPost('userNomb');
                 $userAp   = $this->getPost('userAp');
                 $userAm   = $this->getPost('userAm');                
-                $ine   = $this->getPost('userINE');
-                $FechE   = $this->getPost('FechE');
-                $FechS   = $this->getPost('FechS');
-                $renta   = $this->getPost('renta');
-                $anticipo   = $this->getPost('anticipo');
-                $total   = $this->getPost('total');
+                $ine      = $this->getPost('userINE');
+                $FechE    = $this->getPost('FechE');
+                $FechS    = $this->getPost('FechS');
+                $renta    = $this->getPost('renta');
+                $anticipo = $this->getPost('anticipo');
+                $total    = $this->getPost('total');
                 $idCasa   = $this->getPost('idCasa');
+
+               
+                $houseModel     = new HouseModel();
+                $idCasaURL  = strval($houseModel->getIdCasa($idCasa));
                 
-                error_log("Anfitrion::updateUser() " . $userNomb);
-                
-                error_log("Anfitrion::updateUser() " . $renta);
-                
-                error_log("Anfitrion::updateUser() " . $total);
+               
                 //validate data
                 if($idCasa == '' || empty($idCasa) || $anticipo == '' || empty($anticipo) || $renta == '' || empty($total) || $total == '' || empty($renta) || $FechS == '' || empty($FechS) || $FechE == '' || empty($FechE) || $userNomb == '' || empty($userNomb) || $userAp == '' || empty($userAp) || $userAm == '' || empty($userAm)){
                     // error al validar datos
-                    //$this->errorAtSignup('Campos vacios');
-                    $this->redirect('housecontract', ['error'=> ErrorMessages::ERROR_REGISTRO_VACIO]);
+                    $this->redirectModif('housecontract',['error'=> ErrorMessages::ERROR_REGISTRO_VACIO],'&idCasa='.$idCasaURL.'');
+                    
                     return;
                 }
                 date_default_timezone_set('UTC');
@@ -201,23 +191,19 @@ require_once 'models/promotionmodel.php';
                 $contractModel ->setIdCas($idCasa);
     
                 if($contractModel->save()){
-                    //$this->view->render('login/index');
                     $contracttModel     = new ContractModel();
                     $idContract  = strval($contracttModel->getIdContract($userNomb,$userAp,$userAm,$FechE,$FechS,$idCasa));
-                    
                     $this->redirect('houseaccept?idCasa='.$idContract.'&',['success'=> SuccessMessages::SUCCESS_CONTRATO_SUCCESS]);
                     
                 }else{
-                    /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                    return; */
-                    $this->redirect('housecontract',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
+                    
+                    $this->redirectModif('housecontract',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR], '&idCasa='.$idCasaURL.'');
                 }
                 
     
                 
             }else{
-                // error, cargar vista con errores
-                //$this->errorAtSignup('Ingresa nombre de usuario y userAp');
+                
                 $this->redirect('housecontract',['error'=> ErrorMessages::ERROR_REGISTRO_EXISTE]);
             }
         }

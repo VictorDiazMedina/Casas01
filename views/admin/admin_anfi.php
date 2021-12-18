@@ -367,7 +367,7 @@ function sendDataStatus() {
 
 
 function delDataStatus() {
-    //alert("Enviar Datos");
+
     $.ajax({
 
         url: 'http://localhost:80/Casas01/admin_anfi/deleteStatus',

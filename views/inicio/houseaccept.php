@@ -47,13 +47,14 @@
         <h1>✔️ Se ha registrado su renta</h1>
         <p>Por favor, notifique a nuestro anfitrión mediante WhatsApp.</p>
         <p><a class="btn btn-primary"
-                href="https://api.whatsapp.com/send?phone=+52 1 735 139 9044&text=Solo es una prueba del Proyecto!">Enviar
+                href="https://api.whatsapp.com/send?phone=+52 1 777 443 2521&text=Acabo de reservar tu casa!"
+                target="_blank">Enviar
                 Mensaje</a></p>
     </div>
     <div class="page-error tile">
         <h1>📄 Verifica tu contrato</h1>
         <p>Lee detenidamente tu contrato.</p>
-        <form action="<?php echo constant('URL'); ?>/contractPDF" method="POST">
+        <form target="_blank" action="<?php echo constant('URL'); ?>/contractPDF" method="POST">
             <input type="hidden" id="casa" name="casa" value="<?php echo $_GET["idCasa"]; ?>">
             <button class="btn btn-primary" type="submit"> Generar Contrato</button>
         </form>

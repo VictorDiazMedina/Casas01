@@ -11,6 +11,7 @@ class Admin extends SessionController{
         error_log("Admin::constructor() ");
     }
 
+    //Mostrar Vista
      function render(){
         error_log("Admin::RENDER() ");
 

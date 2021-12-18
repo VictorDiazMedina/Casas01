@@ -8,6 +8,7 @@ require_once 'models/housemodel.php';
             error_log('INICIO::construct-> Inicio Principal');
         }
 
+        //Muestra vista, enviado informacion de la region de cada casa
         function render(){
             error_log('INICIO::render -> Carga el Index de Inicio');
             
@@ -17,6 +18,7 @@ require_once 'models/housemodel.php';
             ]);
         }
 
+        //Obtener todos los usuarios anfitriones
         function getHistoryJSON(){
             header('Content-Type: application/json');
             $res = [];
@@ -32,17 +34,15 @@ require_once 'models/housemodel.php';
     
         }
 
+        //Muestra las casas disponibles en la region del visitante
         function busqRapi(){
 
-            error_log("HOUSECONTRACT: DATAHOUSE()");
+            error_log("INICIO:: busqRapi()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
-                //extraer datos
-                    error_log("EXTRAER DATOS");
-                    
+                //extraer datos                  
     
                     $ubicacion = $input['ubicacion'];
     
@@ -78,6 +78,7 @@ require_once 'models/housemodel.php';
 
         }
 
+        //obtiene la region que hay en cada casa 
         private function getUbication(){
             $res = [];
             $houseModel = new HouseModel();

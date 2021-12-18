@@ -36,8 +36,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">$</span>
                             </div>
-                            <input class="form-control" type="text" name="casaRenta" id="casaRenta" placeholder="MX"
-                                value="<?php echo $house->getCasaRenta()?>">
+                            <input class="form-control" onkeypress="return numbers(event);" type="text" name="casaRenta"
+                                id="casaRenta" placeholder="MX" value="<?php echo $house->getCasaRenta()?>">
                             <div class="input-group-append"><span class="input-group-text">.00</span>
                             </div>
                         </div>
@@ -50,8 +50,9 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">$</span>
                             </div>
-                            <input class="form-control" type="text" name="casaDeposito" id="casaDeposito"
-                                placeholder="MX" value="<?php echo $house->getCasaDeposito()?>">
+                            <input class="form-control" onkeypress="return numbers(event);" type="text"
+                                name="casaDeposito" id="casaDeposito" placeholder="MX"
+                                value="<?php echo $house->getCasaDeposito()?>">
                             <div class="input-group-append"><span class="input-group-text">.00</span>
                             </div>
                         </div>
@@ -61,13 +62,13 @@
                 <div class="row">
                     <label class="control-label col-md-3">Ubicación</label>
                     <div class="form-group col-md-5">
-                        <input class="form-control" type="text" name="casaLati" id="casaLati"
-                            value="<?php echo $house->getCasaLati()?>">
+                        <input class="form-control" onkeypress="return numbers(event);" type="text" name="casaLati"
+                            id="casaLati" value="<?php echo $house->getCasaLati()?>">
                     </div>
 
                     <div class="form-group col-md-5">
-                        <input class="form-control" type="text" name="casaLong" id="casaLong"
-                            value="<?php echo $house->getCasaLong()?>">
+                        <input class="form-control" onkeypress="return numbers(event);" type="text" name="casaLong"
+                            id="casaLong" value="<?php echo $house->getCasaLong()?>">
                     </div>
                 </div>
 
@@ -375,5 +376,15 @@ function iniciarMap() {
 
 <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOhUZGAk2C0EfNybUwsce2-hRJ1Lcaxs4&callback=iniciarMap">
+</script>
+
+<script>
+function numbers(e) {
+    var keynum = window.event ? window.event.keyCode : e.which;
+    if ((keynum == 8) || (keynum == 46))
+        return true;
+
+    return /\d/.test(String.fromCharCode(keynum));
+}
 </script>
 <?php require 'footer_anfi.php'; ?>

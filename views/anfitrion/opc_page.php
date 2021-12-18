@@ -140,7 +140,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-contentFot">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+                    <h5 class="modal-title" id="modalLabel">Recortar Imagen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -151,8 +151,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="crop">Cortar</button>
                 </div>
             </div>
         </div>
@@ -581,7 +581,7 @@ function renderData(data) {
             '           <input class="form-control" type="text" name="servIcon" id="servIcon" placeholder="Agrega un Icono">' +
             '         </div>' +
             '         <div class="divUrl">' +
-            '           <a class="url" href="https://fontawesome.com/v5.15/icons?d=gallery&p=9&m=free"><i class="fa fa-external-link" aria-hidden="true"></i> Ver iconos disponibles</a>' +
+            '           <a class="url" href="https://emojipedia.org/" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> Ver iconos disponibles</a>' +
             '         </div>' +
             '       </div>' +
             '     </div>' +
@@ -589,7 +589,7 @@ function renderData(data) {
             '       <div class="doubletwo">' +
             '         <div>' +
             '           <label class="textModal">Cantidad</label>' +
-            '           <input class="form-control" type="text" name="servCantidad" id="servCantidad" placeholder="Número">' +
+            '           <input class="form-control" onkeypress="return numbers(event);" type="text" name="servCantidad" id="servCantidad" placeholder="Número">' +
             '         </div>' +
             '         <div>   ' +
             '           <label class="textModal">Descripción <span> * </span></label>' +
@@ -644,7 +644,7 @@ function renderData(data) {
                         info.serv_Icon + '">' +
                         '         </div>' +
                         '         <div class="divUrl">' +
-                        '           <a class="url" href="https://fontawesome.com/v5.15/icons?d=gallery&p=9&m=free"><i class="fa fa-external-link" aria-hidden="true"></i> Ver iconos disponibles</a>' +
+                        '           <a class="url" href="https://emojipedia.org/" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> Ver iconos disponibles</a>' +
                         '         </div>' +
                         '       </div>' +
                         '     </div>' +
@@ -652,7 +652,7 @@ function renderData(data) {
                         '       <div class="doubletwo">' +
                         '         <div>' +
                         '           <label class="textModal">Cantidad</label>' +
-                        '           <input class="form-control" type="text" name="servCantidad" id="servCantidad" placeholder="Número" value="' +
+                        '           <input class="form-control" onkeypress="return numbers(event);" type="text" name="servCantidad" id="servCantidad" placeholder="Número" value="' +
                         info.serv_Cantidad + '">' +
                         '         </div>' +
                         '         <div>   ' +
@@ -731,7 +731,7 @@ function renderData(data) {
 }
 
 function closeModal() {
-    //AUI SE LIMPIAN CAMPOS
+    //AQUI SE LIMPIAN CAMPOS
     $('.modalAbel').fadeOut();
 }
 
@@ -768,40 +768,6 @@ function addDataService() {
         }
     });
 }
-/*
-function addDataService() {
-
-    $.ajax({
-
-        url: 'http://localhost:80/Casas01/opc_page/addService',
-        type: 'POST',
-        async: true,
-        data: $('#form_addServiceModal').serialize(), //TOMA TODOS LOS INPUT DE FORMA SERIALIZADA
-
-
-        success: function(response) {
-            console.log(response);
-
-            var info = JSON.parse(response);
-            if (info == 'error') {
-                $('.alertModal').html('<p style="color: red;"> Error al agregar servicio.</p>');
-            } else {
-                getData();
-                $('.servIcon').html('');
-                $('.servDescrip').html('');
-                $('.servCantidad').html('');
-
-                $('.alertModal').html('<p style="color: green;"> Agregado Exitoso.</p>');
-            }
-
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-}
-
-*/
 
 function sendDataService() {
 
@@ -923,7 +889,7 @@ function renderDatatwo(datatwo) {
             '           <input class="form-control" type="text" name="clauIcon" id="clauIcon" placeholder="Agrega un Icono">' +
             '         </div>' +
             '         <div class="divUrl">' +
-            '           <a class="url" href="https://fontawesome.com/v5.15/icons?d=gallery&p=9&m=free"><i class="fa fa-external-link" aria-hidden="true"></i> Ver iconos disponibles</a>' +
+            '           <a class="url" href="https://emojipedia.org/" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> Ver iconos disponibles</a>' +
             '         </div>' +
             '       </div>' +
             '     </div>' +
@@ -989,7 +955,7 @@ function renderDatatwo(datatwo) {
                         info.clau_Icon + '">' +
                         '         </div>' +
                         '         <div class="divUrl">' +
-                        '           <a class="url" href="https://fontawesome.com/v5.15/icons?d=gallery&p=9&m=free"><i class="fa fa-external-link" aria-hidden="true"></i> Ver iconos disponibles</a>' +
+                        '           <a class="url" href="https://emojipedia.org/" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> Ver iconos disponibles</a>' +
                         '         </div>' +
                         '       </div>' +
                         '     </div>' +
@@ -1152,7 +1118,7 @@ function sendDataClause() {
 
 
 function delDataClause() {
-    //alert("Enviar Datos");
+
     $.ajax({
 
         url: 'http://localhost:80/Casas01/opc_page/deleteClause',
@@ -1178,6 +1144,16 @@ function delDataClause() {
             console.log(error);
         }
     });
+}
+</script>
+
+<script>
+function numbers(e) {
+    var keynum = window.event ? window.event.keyCode : e.which;
+    if ((keynum == 8) || (keynum == 46))
+        return true;
+
+    return /\d/.test(String.fromCharCode(keynum));
 }
 </script>
 

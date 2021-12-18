@@ -16,7 +16,9 @@ class PromotionModel extends Model implements IModel{
     }
 
 
-    //Funciones 
+    //Funciones de MODELO PROMOCIONES
+
+    //Funcion para guardar
     public function save(){
         try{
             $query = $this->prepare('INSERT INTO Promocion(promo_Codigo, promo_Cantidad, idCasa) VALUES(:promoCodigo, :promoCantidad, :idCas)');
@@ -32,7 +34,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener todas las promociones
     public function getAll(){
         $items = [];
         try{
@@ -55,7 +57,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener todas las promociones de una casa en especifica
     public function getPromoCasa($id){
        
         try{
@@ -73,6 +75,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
 
+    //Obtener una promocion por su codigo y ID
     public function getPromoCanti($promoCodigo, $idPromocion){
        
         try{
@@ -90,6 +93,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
 
+    //Obtener todas las promociones de una casa en especifica
     public function get($id){
         $items = [];
         try{
@@ -111,6 +115,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
 
+    //Obtener un promocion especifica
     public function getPromo($id){
         $items = [];
         try{
@@ -127,6 +132,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
     
+    //Eliminar una promocion
     public function delete($id){
         try{
             $query = $this->prepare('DELETE FROM Promocion WHERE idPromocion = :id');
@@ -139,7 +145,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
 
-
+    //Actualizar una promocion
     public function update(){
         try{
             $query = $this->prepare('UPDATE Promocion SET promo_Codigo = :promoCodigo, promo_Cantidad = :promoCantidad WHERE idPromocion = :id');
@@ -157,7 +163,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
 
-
+    //Verificar que exista una promocion por codifo y ID
     public function exists($promoCodigo, $idPromocion){
         try{
 
@@ -176,7 +182,7 @@ class PromotionModel extends Model implements IModel{
         }
     }
 
-
+    
     public function from($array){
 
         $this->id = $array['idPromocion'];

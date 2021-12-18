@@ -8,11 +8,12 @@ require_once 'models/clausemodel.php';
     class Houseaccept extends SessionController{
         function __construct(){
             parent::__construct();
-            error_log('INICIO::construct-> Inicio Principal');
+            error_log('HOUSEACCEPT::construct-> Inicio');
         }
 
+        //Mostrar Vista
         function render(){
-            error_log('INICIO::render -> Carga el Index de Inicio');
+            error_log('HOUSEACCEPT::render');
             
             
             $this->view->render('inicio/houseaccept',[

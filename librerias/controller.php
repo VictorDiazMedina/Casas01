@@ -61,8 +61,25 @@ class Controller{
         if($params  != ''){//Validar si no esta vacio
             $params = '?' . $params;
         }
-
         header('Location: ' . constant('URL') . '/' . $route . $params);//redirije cuando termine una accion
+    
+    }
+
+    function redirectModif($route, $mensajes=[], $datas){//cuando haya un error o se cumple un proceso, se redirije a una pagina
+        $data = [];
+        $params = '';
+
+        //Si se cumple un Proceso, mandar mensaje por URL para que la vista lo muestre
+        foreach($mensajes as $key=>$mensaje){
+            array_push($data, $key . '=' . $mensaje);
+        }
+        $params = join('&', $data); //une una areglo con algun caracter
+        if($params  != ''){//Validar si no esta vacio
+            $params = '?' . $params;
+        }
+
+
+        header('Location: ' . constant('URL') . '/' . $route . $params . $datas);//redirije cuando termine una accion
     
     }
 }

@@ -22,22 +22,24 @@ class AdminModel extends database{
     }
 
 
-    public function restore($archivo){
-        $restorePoint=$this->limpiarCadena($archivo);
-        $sql=explode(";",file_get_contents($restorePoint));
-        $totalErrors=0;
-        set_time_limit (60);
-        $con=mysqli_connect($this->host, $this->user, $this->password, $this->db);
-        $con->query("SET FOREIGN_KEY_CHECKS=0");
 
-        for($i = 0; $i < (count($sql)-1); $i++){
+    //Funcion para Restaurar una base de datos
+    public function restore($archivo){
+        $restorePoint=$this->limpiarCadena($archivo);//Limpia inyecciones SQL
+        $sql=explode(";",file_get_contents($restorePoint));//Divide despues de cada linea ";"
+        $totalErrors=0;
+        set_time_limit (60); //Limite de tiempo 
+        $con=mysqli_connect($this->host, $this->user, $this->password, $this->db);//Conexion a la Base de datos
+        $con->query("SET FOREIGN_KEY_CHECKS=0");//Deshabilita temporalmente las restricciones referenciales
+
+        for($i = 0; $i < (count($sql)-1); $i++){//Inserccion de datos
             if($con->query($sql[$i].";")){  }else{ $totalErrors++; }
         }
 
         $con->query("SET FOREIGN_KEY_CHECKS=1");
         $con->close();
 
-        if($totalErrors<=0){
+        if($totalErrors<=0){//Si hay errores, no restaura
             return true;
         }else{
             return false;
@@ -45,30 +47,31 @@ class AdminModel extends database{
 
     }
 
+    //Funcion para Respaldar una base de datos
     public function backup(){
-        $day=date("d");
-        $mont=date("m");
-        $year=date("Y");
-        $hora=date("H-i-s");
+        $day=date("d");//Toma el dia
+        $mont=date("m");//Toma el mes
+        $year=date("Y");//Toma el año
+        $hora=date("H-i-s");//Toma horario
         $fecha=$day.'_'.$mont.'_'.$year;
-        $DataBASE=$fecha."_(".$hora."_hrs).sql";
+        $DataBASE=$fecha."_(".$hora."_hrs).sql";//Nombre del archivo
         $tables=array();
-        $result=$this->sql('SHOW TABLES');
+        $result=$this->sql('SHOW TABLES');//Muestra las tablas de la base de datos
         if($result){
-            while($row=mysqli_fetch_row($result)){
-            $tables[] = $row[0];
+            while($row=mysqli_fetch_row($result)){//Obtiene los datos de cada tabla
+                $tables[] = $row[0];
             }
-            $sql='SET FOREIGN_KEY_CHECKS=0;'."\n\n";
-            $sql.='CREATE DATABASE IF NOT EXISTS '.$this->db.";\n\n";
-            $sql.='USE '.$this->db.";\n\n";;
+            $sql='SET FOREIGN_KEY_CHECKS=0;'."\n\n";//Deshabilita temporalmente las restricciones referenciales
+            $sql.='CREATE DATABASE IF NOT EXISTS '.$this->db.";\n\n";//Crea la base de datos si no existe
+            $sql.='USE '.$this->db.";\n\n";
             foreach($tables as $table){
-                $result=$this->sql('SELECT * FROM '.$table);
+                $result=$this->sql('SELECT * FROM '.$table);//Selecciona cada tabla
                 if($result){
-                    $numFields=mysqli_num_fields($result);
-                    $sql.='DROP TABLE IF EXISTS '.$table.';';
-                    $row2=mysqli_fetch_row($this->sql('SHOW CREATE TABLE '.$table));
+                    $numFields=mysqli_num_fields($result);//Numero de campos 
+                    $sql.='DROP TABLE IF EXISTS '.$table.';';//Elimina la tabla si ya existe
+                    $row2=mysqli_fetch_row($this->sql('SHOW CREATE TABLE '.$table));//Obtener una fila 
                     $sql.="\n\n".$row2[1].";\n\n";
-                    for ($i=0; $i < $numFields; $i++){
+                    for ($i=0; $i < $numFields; $i++){//Ahora realiza el proceso de crear la estructura para Insertar los datos...
                         while($row=mysqli_fetch_row($result)){
                             $sql.='INSERT INTO '.$table.' VALUES(';
                             for($j=0; $j<$numFields; $j++){
@@ -95,10 +98,10 @@ class AdminModel extends database{
             if($error==1){
                 return FALSE;
             }else{
-                chmod('assets/backup/', 0777);
+                chmod('assets/backup/', 0777);//Establecer permisos de leer, escribir y pueda ejecutar, en se directorio
                 $sql.='SET FOREIGN_KEY_CHECKS=1;';
-                $handle=fopen('assets/backup/'.$DataBASE,'w+');
-                if(fwrite($handle, $sql)){
+                $handle=fopen('assets/backup/'.$DataBASE,'w+');//abre el archivo
+                if(fwrite($handle, $sql)){//escribe/sobre el archivo
                     fclose($handle);
                     return TRUE;
                 }else{

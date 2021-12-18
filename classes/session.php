@@ -2,11 +2,11 @@
 
 class Session{
     
-    private $sessionName = 'user';
+    private $sessionName = 'user'; 
 
     public function __construct(){
         
-        //Si no existe un sesion la iniciemos, 
+        //Si no existe una sesion la iniciemos, 
         //de lo contrario no hara sessionSTART
         if(session_status() == PHP_SESSION_NONE){
             session_start();
@@ -18,7 +18,7 @@ class Session{
         $_SESSION[$this->sessionName] = $user;
     }
 
-    //Para obtener el usuario
+    //Para obtener el usuario actual
     public function getCurrentUser(){
         return $_SESSION[$this->sessionName];
     }
@@ -29,9 +29,9 @@ class Session{
         session_destroy();
     }
 
+    //Verificar si existe una Sesion
     public function exists(){
         return isset($_SESSION[$this->sessionName]);
-
     }
 }
 ?>

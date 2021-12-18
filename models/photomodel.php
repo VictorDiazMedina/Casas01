@@ -16,7 +16,9 @@ class PhotoModel extends Model implements IModel{
     }
 
 
-    //Funciones 
+    //Funciones de MODELO FOTOGRAFIAS
+
+    //Funcion de guardar
     public function save(){
         try{
             $query = $this->prepare('INSERT INTO Fotografia(img_Tipo, img_Url, idCasa) VALUES(:imgTipo, :imgUrl, :idCas)');
@@ -32,7 +34,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener todas la fotografias
     public function getAll(){
         $items = [];
         try{
@@ -54,7 +56,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
     
-
+    //Obtener todas las fotografias de una casa en especifica
     public function get($id){
         $items = [];
         try{
@@ -74,6 +76,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
 
+    //Obtener fotografias de tipo Header y Right 1-2 de un casa en especifico
     public function getImg($id){
         $items = [];
         try{
@@ -110,6 +113,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
 
+    //Obtener fotografias por el tipo y una casa en especifica
     public function getGallery($imgTipo,$idCas){
         $items = [];
         try{
@@ -129,6 +133,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
 
+    //Obtener fotografias por el tipo y una casa en especifica
     public function getPhoto($imgTipo, $idCas){
         try{
             $query = $this->prepare('SELECT * FROM Fotografia WHERE img_Tipo = :imgTipo AND idCasa = :idCas');
@@ -143,6 +148,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
     
+    //Obtener URL de fotografias por el tipo y una casa en especifica
     public function getUrlPhoto($imgTipo, $idCas){
         try{
             $query = $this->prepare('SELECT img_Url FROM Fotografia WHERE img_Tipo = :imgTipo AND idCasa = :idCas');
@@ -157,7 +163,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
 
-
+    //Eliminar una fotografia
     public function delete($id){
         try{
             $query = $this->prepare('DELETE FROM Fotografia WHERE idFotografia = :id');
@@ -170,7 +176,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
 
-
+    //Actualizar una fotografia
     public function update(){
         try{
             $query = $this->prepare('UPDATE Fotografia SET img_Url = :imgUrl, img_Tipo = :imgTipo, idCasa = :idCas WHERE idFotografia = :id');
@@ -189,6 +195,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
 
+    //Verificar si existe una fotografia
     public function exists($imgTipo, $idCas){
         try{
 
@@ -207,9 +214,7 @@ class PhotoModel extends Model implements IModel{
         }
     }
 
-    
-
-
+    //Busqueda de cuatro fotografias por una casa en especifico
     public function busqCasas($casa){
         $items = [];
         try{
@@ -246,7 +251,7 @@ class PhotoModel extends Model implements IModel{
             error_log('PhotoMODEL::getAll-> PDOExecption '.$e);
         }
     }
- 
+
 
 
     public function from($array){

@@ -500,7 +500,7 @@ function sendDataContract() {
 
 
 function delDataContract() {
-    //alert("Enviar Datos");
+
     $.ajax({
 
         url: 'http://localhost:80/Casas01/opc_calendar/deleteContract',

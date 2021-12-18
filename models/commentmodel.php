@@ -20,7 +20,9 @@ class CommentModel extends Model implements IModel{
     }
 
 
-    //Funciones 
+    //Funciones de MODELO COMENTARIOS
+
+    //Funcion de guardar
     public function save(){
         try{
             $query = $this->prepare('INSERT INTO Comentario(comment_Fecha, comment_Nomb, comment_Email, comment_Text, idCasa) VALUES(:commentFecha, :commentNomb, :commentEmail, :commentText, :idCas)');
@@ -38,7 +40,7 @@ class CommentModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener todos los comentarios
     public function getAll(){
         $items = [];
         try{
@@ -62,7 +64,7 @@ class CommentModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener los comentarios de una casa especifica
     public function get($id){
         $items = [];
         try{
@@ -87,7 +89,7 @@ class CommentModel extends Model implements IModel{
         }
     }
 
-    
+    //Eliminar un comentario
     public function delete($id){
         try{
             $query = $this->prepare('DELETE FROM Comentario WHERE idComentario = :id');
@@ -100,7 +102,7 @@ class CommentModel extends Model implements IModel{
         }
     }
 
-
+    //Actualizar un Comentario
     public function update(){
         try{
             $query = $this->prepare('UPDATE Comentario SET comment_Fecha = :commentFecha, comment_Nomb = :commentNomb, comment_Email = :commentEmail WHERE idComentario = :id');
@@ -118,9 +120,6 @@ class CommentModel extends Model implements IModel{
             return false;
         }
     }
-
-
- 
 
 
     public function from($array){

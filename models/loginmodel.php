@@ -9,6 +9,7 @@ class LoginModel extends Model{
 
     }
 
+    //Funcion para Iniciar sesión por numero telefonico y contraseña
     function login($userWhats, $userPass){
         try{
             $query = $this->prepare('SELECT * FROM Usuario WHERE user_WhatsApp = :userWhats');

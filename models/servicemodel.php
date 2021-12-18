@@ -18,7 +18,9 @@ class ServiceModel extends Model implements IModel{
     }
 
 
-    //Funciones 
+    //Funciones de MODELO SERVICIOS
+
+    //Funcion para guardar
     public function save(){
         try{
             $query = $this->prepare('INSERT INTO Servicio(serv_Icon, serv_Cantidad, serv_Descripcion, idCasa) VALUES(:servIcon, :servCantidad, :servDescrip, :idCas)');
@@ -35,7 +37,7 @@ class ServiceModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener todos los servicios
     public function getAll(){
         $items = [];
         try{
@@ -58,7 +60,7 @@ class ServiceModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener todos los servicios de una casa en especifico
     public function get($id){
         $items = [];
         try{
@@ -87,6 +89,7 @@ class ServiceModel extends Model implements IModel{
         }
     }
 
+    //Obtener un servicio en especifico
     public function getService($id){
         $items = [];
         try{
@@ -103,7 +106,7 @@ class ServiceModel extends Model implements IModel{
         }
     }
 
-
+    //Eliminar un servicio
     public function delete($id){
         try{
             $query = $this->prepare('DELETE FROM Servicio WHERE idServicio = :id');
@@ -116,7 +119,7 @@ class ServiceModel extends Model implements IModel{
         }
     }
 
-
+    //Actualizar un servicio
     public function update(){
         try{
             $query = $this->prepare('UPDATE Servicio SET serv_Icon = :servIcon, serv_Cantidad = :servCantidad, serv_Descripcion = :servDescrip WHERE idServicio = :id');

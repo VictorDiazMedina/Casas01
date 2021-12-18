@@ -16,6 +16,7 @@ require_once 'models/promotionmodel.php';
             error_log('ADMIN::construct-> ADMIN_ANFI');
         }
 
+        //Carga la vista, mandando informacion 
         function render(){
             error_log('ADMIN::render -> Carga el Index de ADMIN');
             
@@ -26,17 +27,19 @@ require_once 'models/promotionmodel.php';
             $this->usesr       = new UserModel();            
             $this->contract    = new ContractModel();
 
-           
+            //datos para el reporte por Mes
             $meses             = $this->getMes();
             $contratos         = $this->contract->getContratos();
             $colorTiempo       = $this->getColorTiempo($meses);
             $labelsTiempo      = $this->getLabelsTiempo($meses, $contratos, $colorTiempo);
 
+            //datos para el reporte por Casas
             $casas             = $this->contract->getRentas();
             $colorRentas       = $this->getColorTiempo($casas);
             $labelsRentas      = $this->getLabelsRentas($casas, $colorRentas);
             $rentas            = $this->getRentas($casas, $colorRentas);
 
+            //datos para el reporte por Estados
             $estados           = $this->contract->getEstados();
             $colorEstados      = $this->getColorTiempo($estados);
             $labelsEstados     = $this->getLabelsEstados($estados, $colorEstados);
@@ -60,6 +63,7 @@ require_once 'models/promotionmodel.php';
             
         }
         
+        //Convierte cada mes a su Acronimo
         function getShortMes($meses){
             $res = [];
     
@@ -108,19 +112,21 @@ require_once 'models/promotionmodel.php';
             return $meses;
         } 
 
+        //Inserta los datos en un arreglo, ejemplo: [5] Marzo
         function getLabelsTiempo($meses, $contratos, $colorTiempo){
-            //$shortMes = $this->getShortMes($meses);
+            
             $res = [];
     
             for ($x = 0; $x < count($meses); $x++) {
                
-                $mes = "[ ".$contratos[$x]." ] ".$meses[$x]; // marzo
+                $mes = "[ ".$contratos[$x]." ] ".$meses[$x]; 
                 
                 array_push($res, $mes);
             }
             return $res;
         }
         
+        //Obtener un color aleatorio por cada elemento del arreglo enviado
         function getColorTiempo($meses){
             $res = [];
     
@@ -132,6 +138,7 @@ require_once 'models/promotionmodel.php';
             return $res;
         }
 
+        //Obtener los datos de renta por Mes
         function getMes(){
             $res = [];
             $contractModel    = new ContractModel();
@@ -149,9 +156,8 @@ require_once 'models/promotionmodel.php';
             }
             return $res;
         }
-
-
         
+        //Realizar un objeto por casa y su color
         function getRentas($casas, $colorRentas){
             $res = [];
             $contractModel    = new ContractModel();
@@ -168,13 +174,13 @@ require_once 'models/promotionmodel.php';
             return $res;
         }
 
+        //Inserta los datos en un arreglo, ejemplo: [5] Casa Verde
         function getLabelsRentas($casas, $colorRentas){
-            //$shortMes = $this->getShortMes($meses);
             $res = [];
             
             for ($x = 0; $x < count($casas); $x++) {
                
-                $mes = "[ ".$casas[$x]->getContFechEntrada()." ] ".$casas[$x]->getIdCas(); // marzo
+                $mes = "[ ".$casas[$x]->getContFechEntrada()." ] ".$casas[$x]->getIdCas(); 
                 
                 array_push($res, $mes);
             }
@@ -182,6 +188,7 @@ require_once 'models/promotionmodel.php';
             return $res;
         }
 
+        //Realizar un objeto por Estado y su color
         function getEstados($estados, $colorEstados){
             $res = [];
             $contractModel    = new ContractModel();
@@ -198,13 +205,13 @@ require_once 'models/promotionmodel.php';
             return $res;
         }
 
+        //Inserta los datos en un arreglo, ejemplo: [5] Puebla
         function getLabelsEstados($estados, $colorEstados){
-            //$shortMes = $this->getShortMes($meses);
             $res = [];
             
             for ($x = 0; $x < count($estados); $x++) {
                
-                $mes = "[ ".$estados[$x]->getContFechEntrada()." ] ".$estados[$x]->getIdCas(); // marzo
+                $mes = "[ ".$estados[$x]->getContFechEntrada()." ] ".$estados[$x]->getIdCas(); 
                 
                 array_push($res, $mes);
             }
@@ -212,11 +219,12 @@ require_once 'models/promotionmodel.php';
             return $res;
         }
 
+        //Obtener un color aleatorio
         function getColor(){
             return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
         }
 
-
+        //Obetener todas las Casas, y mandarlo en formato JSON
         function getDataCasasJSON(){
             header('Content-Type: application/json');
             $res = [];
@@ -232,6 +240,7 @@ require_once 'models/promotionmodel.php';
     
         }
 
+        //Obetener todas las Promociones, y mandarlo en formato JSON
         function getHistoryJSON(){
             header('Content-Type: application/json');
             $res = [];
@@ -247,6 +256,7 @@ require_once 'models/promotionmodel.php';
     
         }
 
+        //Registro de una nueva Promocion
         function newPromo(){
             if($this->existPOST(['houseSelect', 'promo_Codigo', 'promo_Cantidad'])){
                 
@@ -254,8 +264,8 @@ require_once 'models/promotionmodel.php';
                 $promoCodigo   = $this->getPost('promo_Codigo');
                 $promoCantidad   = $this->getPost('promo_Cantidad');
 
-                error_log("ADMIN::newPromo() " . $casaNombre );
-                //validate data
+                error_log("ADMIN_REPORT::newPromo() " . $casaNombre );
+                
                 
                 $promotionModel     = new PromotionModel();
 
@@ -266,11 +276,8 @@ require_once 'models/promotionmodel.php';
     
     
                 if($promotionModel->save()){
-                    //$this->view->render('login/index');
                     $this->redirect('admin_report',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
                 }else{
-                    /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                    return; */
                     $this->redirect('admin_report',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
                 }
     
@@ -278,15 +285,15 @@ require_once 'models/promotionmodel.php';
     
             }else{
                 // error, cargar vista con errores
-                //$this->errorAtSignup('Ingresa nombre de usuario y promoCodigo');
                 $this->redirect('admin_report',['error'=> ErrorMessages::ERROR_REGISTRO_EXISTE]);
             }
         }
 
+        //Obtener una promocion y mandarlo en formato JSON
         function getPromo(){
         
             error_log("ADMIN_REPORT: GETPROMO");
-            //print_r($_POST); exit;
+            
             if(!empty($_POST)){
                 //extraer datos
                 if($_POST['action'] == 'infoPromo'){
@@ -308,11 +315,11 @@ require_once 'models/promotionmodel.php';
             exit;
         }
 
-
+        //Actualiza una promocion y manda respuesta en JSON
         function updatePromocion(){
         
             error_log("ADMIN_REPORT: UPDATEPROMOCION");
-            //print_r($_POST); exit;
+           
             if(!empty($_POST)){
                 if($_POST['action'] == 'updatePromo'){
                     if(!empty($_POST['promoCodigo']) || !empty($_POST['promoCantidad'])  || !empty($_POST['idPromocion']) || !empty($_POST['idCasa']) ){
@@ -332,15 +339,10 @@ require_once 'models/promotionmodel.php';
                         $promotionModel->setId($id);
 
                         if($promotionModel->update()){
-                            //$this->view->render('login/index');
-                            //$this->redirect('opc_calendar',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
                             echo json_encode('ok', JSON_UNESCAPED_UNICODE);
                             
                             exit;
                         }else{
-                            /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                            return; */
-                            // $this->redirect('opc_calendar',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
                             echo json_encode('error', JSON_UNESCAPED_UNICODE);
                             
                             exit;
@@ -348,7 +350,6 @@ require_once 'models/promotionmodel.php';
                             
                         
                     }else{
-                        //$this->redirect('opc_calendar', ['error'=> ErrorMessages::ERROR_REGISTRO_VACIO]);
                         echo 'error';
                     }
                     exit;
@@ -358,11 +359,10 @@ require_once 'models/promotionmodel.php';
             
         }
     
-    
-        
+        //Elimina una promocion y manda respuesta en JSON
         function deletePromocion(){
             error_log("ADMIN_REPORT: DELETEPROMOCION");
-            //print_r($_POST); exit;
+            
             if(!empty($_POST)){
                 if($_POST['action'] == 'delPromocion'){
                     if(!empty($_POST['idPromocion']) ){
@@ -370,18 +370,12 @@ require_once 'models/promotionmodel.php';
                         $promotionModel     = new PromotionModel();
     
                         if($promotionModel->delete($id)){
-                            //$this->view->render('login/index');
-                            //$this->redirect('opc_calendar',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
                             echo 'ok';
                             exit;
                         }else{
-                            /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                            return; */
-                            //$this->redirect('opc_calendar',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
                             echo 'error';
                         }
                     }else{
-                        //$this->redirect('opc_calendar', ['error'=> ErrorMessages::ERROR_REGISTRO_VACIO]);
                         echo 'error';
                     }
                     exit;

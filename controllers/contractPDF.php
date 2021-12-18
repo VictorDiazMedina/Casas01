@@ -14,11 +14,12 @@ require_once 'models/clausemodel.php';
 
         function __construct(){
             parent::__construct();
-            error_log('INICIO::construct-> Inicio Principal');
+            error_log('CONTRACTPDF::construct');
         }
 
+        //Mostrar Vistam eviando datos para generar el contrato
         function render(){
-            error_log('INICIO::render -> Carga el Index de Inicio');
+            error_log('CONTRACTPDF::render');
             
             if($this->existPOST(['casa'])){
             

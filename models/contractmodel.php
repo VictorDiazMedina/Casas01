@@ -33,7 +33,9 @@ class ContractModel extends Model implements IModel{
     }
 
 
-    //Funciones 
+    //Funciones de MODELO CONTRATOS
+
+    //Funcion para guardar
     public function save(){
         try{
             $query = $this->prepare('
@@ -58,7 +60,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
-
+    //Obtener todos los contratos
     public function getAll(){
         $items = [];
         try{
@@ -86,8 +88,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
-
-
+    //Obtener el numero de rentas por casa
     public function getRentas(){
         $items = [];
         try{
@@ -107,8 +108,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
-
-
+    //Obtener el numero de rentas por Estado
     public function getEstados(){
         $items = [];
         try{
@@ -128,6 +128,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
+    //Obtener el numero de rentas por Mes
     public function getMes(){
         $items = [];
         try{
@@ -143,6 +144,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
+    //Obtener el numero de rentas 
     public function getContratos(){
         $items = [];
         try{
@@ -158,6 +160,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
+    //Obtener el ID de contrato por busqueda de datos
     public function getIdContract($aN, $aP, $aM, $fechE, $fechS, $idCasa){
         try{
             $query = $this->prepare('SELECT idContrato
@@ -174,6 +177,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
+    //Obtener todos los contratos por una casa especifica
     public function get($id){
         $items = [];
         try{
@@ -193,6 +197,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
+    //Obtener un contrato
     public function getC($id){
         $items = [];
         try{
@@ -220,6 +225,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
+    //Obtener un contrato
     public function getContract($id){
         $items = [];
         try{
@@ -236,7 +242,7 @@ class ContractModel extends Model implements IModel{
         }
     }
 
-
+    //Eliminar un contrato
     public function delete($id){
         try{
             $query = $this->prepare('DELETE FROM Contrato WHERE idContrato = :id');
@@ -248,8 +254,8 @@ class ContractModel extends Model implements IModel{
             return false;
         }
     }
-
-
+    
+    //Actualizar un contrato
     public function update(){
         try{
             $query = $this->prepare('UPDATE Contrato SET cont_NombreArren = :contNombreArren, cont_APaterArren = :contAPaterArren, cont_AMaterArren = :contAMaterArren, cont_FechEntrada = :contFechEntrada, cont_FechSalida = :contFechSalida, cont_MontoTotal = :contMontoTotal WHERE idContrato = :id');

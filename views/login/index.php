@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inicio de Sesión</title>
-    <script src="https://kit.fontawesome.com/bd0ed12ca6.js" crossorigin="anonymous"></script>
 
 
     <link rel="stylesheet" href="assets/css/nav.css">
@@ -33,7 +32,9 @@
                 <form class="login-form" action="<?php echo constant('URL'); ?>/login/authenticate" method="POST">
                     <div><?php (isset($this->errorMessage))?  $this->errorMessage : '' ?></div>
 
-                    <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIO SESIÓN</h3>
+                    <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIO
+                        SESIÓN
+                    </h3>
 
 
                     <div class="form-group">

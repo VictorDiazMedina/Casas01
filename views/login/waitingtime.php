@@ -27,7 +27,7 @@
             <h1><i class="fa fa-exclamation-circle"></i> Usted no ha sido Autorizado</h1>
             <p>Contacte el Administrador por WhatsApp.</p>
             <p><a class="btn btn-primary"
-                    href="https://api.whatsapp.com/send?phone=+52 1 735 139 9044&text=Quiero ser Anfitrión, no tengo acceso. ">Enviar
+                    href="https://api.whatsapp.com/send?phone=+52 1 777 443 2521&text=Quiero ser Anfitrión, no tengo acceso. ">Enviar
                     Mensaje</a></p>
         </div>
     </main>

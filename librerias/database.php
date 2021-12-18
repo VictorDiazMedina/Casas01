@@ -21,6 +21,7 @@ class Database{
         
     }
 
+    //Funcion para conectar a la Base de Datos
     function connect(){
         try{
             $connection = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;

@@ -21,7 +21,6 @@ class SessionController extends Controller{
  
     function __construct(){
         parent::__construct();
-
         $this->init();
     }
 
@@ -38,7 +37,7 @@ class SessionController extends Controller{
     }
 
     /**
-     * Inicializa el parser para leer el .json
+     * Inicializa el parser para leer el Access.json
      */
     private function init(){
         //se crea nueva sesión
@@ -50,7 +49,7 @@ class SessionController extends Controller{
         // se asignan los sitios por default, los que cualquier rol tiene acceso
         $this->defaultSites = $json['default-sites'];
         // inicia el flujo de validación para determinar
-        // el tipo de rol y permismos
+        // el tipo de rol y permisos
         $this->validateSession();
     }
     /**
@@ -119,6 +118,10 @@ class SessionController extends Controller{
         return false;
     }
 
+    /**
+     * Crear un nuevo Modelo del Usuario
+     * para utilizar sus propiedades
+     */
     function getUserSessionData(){
         $id = $this->session->getCurrentUser();
         $this->user = new UserModel();
@@ -127,6 +130,10 @@ class SessionController extends Controller{
         return $this->user;
     }
 
+    /**
+     * Crear un nuevo Modelo del Casa con respecto al Usuario
+     * para utilizar sus propiedades
+     */
     function getHouseSessionData(){
         $id = $this->session->getCurrentUser();
         $this->house = new HouseModel();
@@ -135,12 +142,18 @@ class SessionController extends Controller{
         return $this->house;
     }
 
+    /**
+     * Permite el acceso cuando Inicia sesion correctamente
+     */
     public function initialize($user){
         error_log("sessionController::initialize(): user: " . $user->getUserWhats());
         $this->session->setCurrentUser($user->getId());
         $this->authorizeAccess($user->getRole());
     }
 
+     /**
+     * Verificar la URL que la pagina que ha entrado, sea publico
+     */
     private function isPublic(){
         $currentURL = $this->getCurrentPage();
         error_log("sessionController::isPublic(): currentURL => " . $currentURL);
@@ -153,6 +166,10 @@ class SessionController extends Controller{
         return false;
     }
 
+    /**
+     * Redireccionar al Usuario al entrar en sitios no permitidos
+     * Se redirecciona a su Index principal
+     */
     private function redirectDefaultSiteByRole($role){
         $url = '';
         for($i = 0; $i < sizeof($this->sites); $i++){
@@ -165,6 +182,10 @@ class SessionController extends Controller{
         
     }
 
+    /**
+     * Verificar si el usuario esta autorizado entrar a la
+     * pagina que esta navegando
+     */
     private function isAuthorized($role){
         $currentURL = $this->getCurrentPage();
         $currentURL = preg_replace( "/\?.*/", "", $currentURL); //omitir get info
@@ -177,6 +198,10 @@ class SessionController extends Controller{
         return false;
     }
 
+     /**
+     * Obtener la URL actual
+     * para saber cual pagina de vista esta entrando
+     */
     private function getCurrentPage(){
         
         $actual_link = trim("$_SERVER[REQUEST_URI]");
@@ -185,11 +210,16 @@ class SessionController extends Controller{
         return $url[2];
     }
 
+
+    /**
+     * Redireccionar al Usuario a su pagina principal cuando
+     * se Inicia sesion
+     */
     function authorizeAccess($role){
         error_log("sessionController::authorizeAccess(): role: $role");
         switch($role){
             case 'user':
-                $this->redirect($this->defaultSites['user']);
+                $this->redirect($this->defaultSites['anfitrion']);
             break;
             case 'admin':
                 $this->redirect($this->defaultSites['admin']);
@@ -198,6 +228,9 @@ class SessionController extends Controller{
         }
     }
 
+    /**
+     * Cierra Sesion
+     */
     function logout(){
         $this->session->closeSession();
     }

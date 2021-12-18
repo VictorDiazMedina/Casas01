@@ -5,7 +5,7 @@ require_once 'models/housemodel.php';
 
 class Register extends SessionController{
 
-    //COnstructor
+    //Constructor
     function __construct(){
         parent::__construct();
     }
@@ -45,7 +45,6 @@ class Register extends SessionController{
             }else if($user->save()){
                 $userCa = new UserModel();
                 $house  = new HouseModel();
-                //$this->view->render('login/index');
                 $idUser = $userCa->idWhats($userWhats);
                 $house->newHouse($idUser);
                 
@@ -56,8 +55,6 @@ class Register extends SessionController{
                 }
                 $this->redirect('login',['success'=> SuccessMessages::SUCCESS_REGISTRO_SUCCESS]);
             }else{
-                /* $this->errorAtSignup('Error al registrar el usuario. Inténtalo más tarde');
-                return; */
                 $this->redirect('register',['error'=> ErrorMessages::ERROR_REGISTRO_ERROR]);
             }
             }
@@ -65,7 +62,6 @@ class Register extends SessionController{
             
         }else{
             // error, cargar vista con errores
-            //$this->errorAtSignup('Ingresa nombre de usuario y userPass');
             $this->redirect('register',['error'=> ErrorMessages::ERROR_REGISTRO_EXISTE]);
         }
     }

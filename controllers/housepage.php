@@ -9,17 +9,19 @@ require_once 'models/commentmodel.php';
     class Housepage extends SessionController{
         function __construct(){
             parent::__construct();
-            error_log('INICIO::construct-> Inicio Principal');
+            error_log('HOUSEPAGE::construct');
         }
 
+        //Mostrar Vista
         function render(){
-            error_log('INICIO::render -> Carga el Index de Inicio');
+            error_log('HOUSEPAGE::render');
             
             
             $this->view->render('inicio/housepage',[
             ]);
         }
         
+        //Obtener todos los comentarios de una casa
         function getDataCommentJSON(){
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
@@ -45,10 +47,11 @@ require_once 'models/commentmodel.php';
             exit;
         }
         
+        //Captura un nuevo comentario a una casa
         function addComment(){
         
-            error_log("HOUSEPAGE: ADDComment");
-            //print_r($_POST); exit;
+            error_log("HOUSEPAGE: addComment()");
+            
             if(!empty($_POST)){
                 if($_POST['action'] == 'addComment'){
                     if(!empty($_POST['commentEmail'])){
@@ -98,16 +101,15 @@ require_once 'models/commentmodel.php';
             exit;
         }
         
+        //Obtiene las fotografias de tipo Galeria de una casa
         function galleryHouse(){
             
-            error_log("HOUSEPAGE: GALLERYHOUSE()");
+            error_log("HOUSEPAGE: galleryHouse()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
                 //extraer datos
-                    error_log("EXTRAER DATOS");
                     $idCasa = $input['idCasa'];
     
                     
@@ -128,17 +130,17 @@ require_once 'models/commentmodel.php';
             echo 'error';
             exit;
 
-        }  
+        } 
+        
+        //Obtiene todas las clausulas de una Casa
         function clauHouse(){
             
-            error_log("HOUSEPAGE: CLAUHOUSE()");
+            error_log("HOUSEPAGE: clauHouse()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
                 //extraer datos
-                    error_log("EXTRAER DATOS");
                     $idCasa = $input['idCasa'];
     
                     
@@ -159,17 +161,17 @@ require_once 'models/commentmodel.php';
             echo 'error';
             exit;
 
-        }  
+        } 
+
+        //Obtiene  todos los servicios de una Casa
         function servHouse(){
             
-            error_log("HOUSEPAGE: SERVOUSE()");
+            error_log("HOUSEPAGE: servHouse()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
                 //extraer datos
-                    error_log("EXTRAER DATOS");
                     $idCasa = $input['idCasa'];
     
                     
@@ -190,17 +192,17 @@ require_once 'models/commentmodel.php';
             echo 'error';
             exit;
 
-        }        
+        }     
+
+        //Obtener fotografias de una Casa
         function imgHouse(){
             
-            error_log("HOUSEPAGE: IMGHOUSE()");
+            error_log("HOUSEPAGE: imgHouse()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
                 //extraer datos
-                    error_log("EXTRAER DATOS");
                     $idCasa = $input['idCasa'];
     
                     
@@ -223,16 +225,15 @@ require_once 'models/commentmodel.php';
 
         }
         
+        //Obtener datos de una Casa
         function dataHouse(){
             
-            error_log("HOUSEPAGE: DATAHOUSE()");
+            error_log("HOUSEPAGE: dataHouse()");
             header("Content-type: application/json; charset=utf-8");
             $input = json_decode(file_get_contents("php://input"), true);
 
             if(!empty($input)){
-                error_log("NO VIENE VACIO");
                 //extraer datos
-                    error_log("EXTRAER DATOS");
                     $idCasa = $input['idCasa'];
     
                     

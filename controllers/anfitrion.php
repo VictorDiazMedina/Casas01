@@ -11,6 +11,7 @@ class Anfitrion extends SessionController{
         error_log("Anfitrion::constructor() ");
     }
 
+    //Mostrar Vista
      function render(){
         error_log("Anfitrion::RENDER() ");
 
@@ -20,20 +21,6 @@ class Anfitrion extends SessionController{
     }
     
 
-
-    
-    public function getCasa(){
-            /*$res = [];
-            $casaModel = new CasaModel();
-
-            $casas = $casaModel->getAll();
-
-            foreach($casas as $casa){
-                $casaArray = [];
-
-            }
-            return $casa-> get($);*/
-    }
 
 
 }

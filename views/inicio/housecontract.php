@@ -136,7 +136,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text">$</span>
                                         </div>
-                                        <input name="anticipo" id="anticipo" class="form-control" type="text"
+                                        <input name="anticipo" id="anticipo" class="form-control"
+                                            onkeypress="return numbers(event);" type="text"
                                             placeholder="Escriba la cantidad de Anticipo (MX)" onblur="myFunction()"
                                             value="">
                                         <div class="input-group-append"><span class="input-group-text">.00</span>
@@ -171,7 +172,7 @@
 
                 </div>
 
-                <input type="hidden" name="idCasa" id="idCasa" value="">
+                <input type="hidden" name="idCasa" id="idCasa" value="<?php echo $_GET["idCasa"]; ?>">
                 <div class="tile-footer">
                     <button class="btn btn-outline-success btn-lg btn-block" type="submit"> REALIZAR CONTRATO
                     </button>
@@ -426,7 +427,15 @@
     getDataFechas();
     </script>
 
+    <script>
+    function numbers(e) {
+        var keynum = window.event ? window.event.keyCode : e.which;
+        if ((keynum == 8) || (keynum == 46))
+            return true;
 
+        return /\d/.test(String.fromCharCode(keynum));
+    }
+    </script>
 
 </body>
 
